@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'nin.rb')
+require_relative '../lib/nin.rb'
 
 require 'minitest/autorun'
 
