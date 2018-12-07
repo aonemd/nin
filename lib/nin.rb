@@ -19,6 +19,8 @@ module Nin
 
     def initialize(options = {})
       @store = options.fetch(:store, "#{ENV['HOME']}/.todos.toml")
+      create_store unless File.exists?(@store)
+
       @items = load_items
     end
 
@@ -35,6 +37,10 @@ module Nin
     end
 
     private
+
+    def create_store
+      File.open(@store, "w") { |_| }
+    end
 
     def load_items
       TomlRB.load_file(@store).values.map do |item|
