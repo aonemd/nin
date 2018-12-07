@@ -2,13 +2,12 @@ require_relative '../lib/nin.rb'
 
 require 'minitest/autorun'
 
-module NinTest
-  class Item < Minitest::Test
-    def test_it_deos_something_useful
-      assert 1 == 1
-    end
+class Nin::TodoTest < Minitest::Test
+  def setup
+    @todo = Nin::Todo.new(store: File.expand_path('./test/todos.toml'))
   end
 
-  class Todo < Minitest::Test
+  def test_initialize_loads_items
+    refute_empty @todo.items
   end
 end

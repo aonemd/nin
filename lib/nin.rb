@@ -1,3 +1,5 @@
+require 'toml-rb'
+
 module Nin
   class Item
     attr_accessor :body
@@ -13,8 +15,10 @@ module Nin
 
   class Todo
     attr_accessor :items
+    attr_reader :store
 
-    def initialize()
+    def initialize(options = {})
+      @store = options.fetch(:store, "#{ENV['HOME']}/.todos.toml")
       @items = load_items
     end
 
@@ -33,7 +37,9 @@ module Nin
     private
 
     def load_items
-      []
+      TomlRB.load_file(@store).values.map do |item|
+        Item.new(item.fetch('desc'))
+      end
     end
   end
 end
