@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.email       = 'aonemdsaleh@gmail.com'
   gem.description = "Under construction"
   gem.summary     = "Under construction"
-  gem.homepage    = 'https://github.com/gems/nin'
+  gem.homepage    = 'https://github.com/aonemd/nin'
 
   gem.files         = `git ls-files`.split($\).reject do |f|
     f.match(%r{^(test|spec|features)/})
