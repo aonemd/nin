@@ -10,9 +10,14 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split($\).reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
+  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
 
   gem.name        = 'nin'
   gem.version     = '0.0.0'
-  gem.files       = ["lib/nin.rb"]
   gem.license     = 'MIT'
+
+  gem.add_dependency 'toml-rb'
+
+  gem.add_development_dependency 'byebug'
+  gem.add_development_dependency 'minitest'
 end
