@@ -23,6 +23,8 @@ module Nin
     end
 
     def delete(id)
+      item = @items.find { |item| item.id == id }
+      @items.delete(item)
     end
 
     private

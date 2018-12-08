@@ -50,5 +50,11 @@ module Nin
       assert_equal @todo.items.first.id, 1
       assert_equal return_msg, 'Wrote to store successfully'
     end
+
+    def test_delete
+      @todo.delete(2)
+
+      assert_equal 1, @todo.items.count
+    end
   end
 end
