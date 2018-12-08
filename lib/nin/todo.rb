@@ -11,8 +11,8 @@ module Nin
     def list
     end
 
-    def add(body)
-      @items << Item.new(next_id, body)
+    def add(desc)
+      @items << Item.new(next_id, desc)
       @store.write(to_hash)
     end
 
@@ -32,7 +32,7 @@ module Nin
 
     def to_hash
       @items.reduce({}) do |hash, item|
-        hash[item.id] = { 'desc' => item.body }
+        hash[item.id] = { 'desc' => item.desc }
         hash
       end
     end

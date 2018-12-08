@@ -1,14 +1,14 @@
 module Nin
   class Item
-    attr_accessor :id, :body
+    attr_accessor :id, :desc
 
-    def initialize(id, body)
+    def initialize(id, desc)
       @id   = id
-      @body = body
+      @desc = desc
     end
 
     def to_s
-      "#{@id}: #{@body}"
+      "#{@id}: #{@desc}"
     end
   end
 end
