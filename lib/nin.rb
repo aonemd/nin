@@ -1,8 +1,8 @@
 require 'toml-rb'
 
-require 'nin/store'
-require 'nin/item'
-require 'nin/todo'
+require_relative 'nin/store'
+require_relative 'nin/item'
+require_relative 'nin/todo'
 
 module Nin
 end
