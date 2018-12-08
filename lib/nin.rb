@@ -1,72 +1,10 @@
 require 'toml-rb'
 
+require 'nin/store'
+require 'nin/item'
+require 'nin/todo'
+
 module Nin
-  class Item
-    attr_accessor :body
-
-    def initialize(desc)
-      @desc = desc
-    end
-
-    def to_s
-      "#{@desc}"
-    end
-  end
-
-  class Store
-    DEFAULT_FILE = "#{ENV['HOME']}/.todos.toml"
-
-    def initialize(file = DEFAULT_FILE)
-      @file = file
-
-      init_store
-    end
-
-    def read
-      TomlRB.load_file(@file)
-    end
-
-    def write
-    end
-
-    private
-
-    def init_store
-      return if File.exists?(@file)
-
-      File.open(@file, "w")
-    end
-  end
-
-  class Todo
-    attr_accessor :items
-    attr_reader :store
-
-    def initialize(store = Store.new)
-      @store = store
-      @items = load_items
-    end
-
-    def list
-    end
-
-    def add(todo)
-    end
-
-    def edit(id)
-    end
-
-    def delete(id)
-    end
-
-    private
-
-    def load_items
-      @store.read.values.map do |item|
-        Item.new(item.fetch('desc'))
-      end
-    end
-  end
 end
 
 if __FILE__ == $0
