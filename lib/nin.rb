@@ -14,7 +14,7 @@ if __FILE__ == $0
   when 'a'
     Nin::Todo.new.add(ARGV[1])
   when 'e'
-    Nin::Todo.new.edit(ARGV[1])
+    Nin::Todo.new.update(ARGV[1], ARGV[2])
   when 'd'
     Nin::Todo.new.delete(ARGV[1])
   else
@@ -22,7 +22,7 @@ if __FILE__ == $0
     puts "COMMANDS:"
     puts "  l             List all todos"
     puts "  a desc        Add a todo"
-    puts "  e id          Edit a todo"
+    puts "  u id desc     Update a todo"
     puts "  d id          Remove a todo"
   end
 end

@@ -51,6 +51,12 @@ module Nin
       assert_equal 'Wrote to store successfully', return_msg
     end
 
+    def test_update
+      @todo.update(2, 'Fake Task 2 desc updated')
+
+      assert_equal 'Fake Task 2 desc updated', @todo.items.last.desc
+    end
+
     def test_delete
       @todo.delete(2)
 

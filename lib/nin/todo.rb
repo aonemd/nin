@@ -19,11 +19,13 @@ module Nin
       @store.write(to_hash)
     end
 
-    def edit(id)
+    def update(id, new_desc)
+      item      = find_by_id(id)
+      item.desc = new_desc
     end
 
     def delete(id)
-      item = @items.find { |item| item.id == id }
+      item = find_by_id(id)
       @items.delete(item)
     end
 
@@ -48,6 +50,10 @@ module Nin
       rescue NoMethodError
         1
       end
+    end
+
+    def find_by_id(id)
+      @items.find { |item| item.id == id }
     end
   end
 end
