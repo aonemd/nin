@@ -16,7 +16,7 @@ module Nin
     end
 
     def test_initialize_creates_new_store
-      assert File.exists?(@file)
+      assert File.exist?(@file)
     end
 
     def test_read

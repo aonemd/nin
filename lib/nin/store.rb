@@ -18,7 +18,7 @@ module Nin
     private
 
     def init_store
-      return if File.exists?(@file)
+      return if File.exist?(@file)
 
       File.open(@file, "w")
     end
