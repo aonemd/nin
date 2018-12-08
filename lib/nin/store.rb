@@ -12,7 +12,10 @@ module Nin
       TomlRB.load_file(@file)
     end
 
-    def write
+    def write(hash)
+      File.open(@file, 'w') do |file|
+        file.write(TomlRB.dump(hash))
+      end
     end
 
     private
