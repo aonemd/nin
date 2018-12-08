@@ -1,8 +1,5 @@
 require 'test_helper'
 
-require 'nin/item'
-require 'nin/todo'
-
 module Nin
   class FakeStore
     def read

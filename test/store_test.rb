@@ -1,9 +1,5 @@
 require 'test_helper'
 
-require 'toml-rb'
-
-require 'nin/store'
-
 module Nin
   class StoreTest < Minitest::Test
     def setup
