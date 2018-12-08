@@ -1,6 +1,6 @@
-require 'toml-rb'
-
 require 'test_helper'
+
+require 'toml-rb'
 
 require 'nin/store'
 
