@@ -23,8 +23,8 @@ module Nin
     private
 
     def load_items
-      @store.read.values.map do |item|
-        Item.new(item.fetch('desc'))
+      @store.read.map do |key, value|
+        Item.new(key, value.fetch('desc'))
       end
     end
   end
