@@ -1,4 +1,5 @@
 # coding: utf-8
+require File.expand_path('../lib/nin/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors     = ["Ahmed Saleh"]
@@ -13,9 +14,9 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.executables   = ["nin"]
 
-  gem.name        = 'nin'
-  gem.version     = '0.0.0'
-  gem.license     = 'MIT'
+  gem.name    = 'nin'
+  gem.version = Nin::VERSION
+  gem.license = 'MIT'
 
   gem.add_dependency 'toml-rb'
 
