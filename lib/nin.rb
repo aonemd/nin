@@ -13,14 +13,37 @@ module Nin
     end
   end
 
+  class Store
+    DEFAULT_FILE = "#{ENV['HOME']}/.todos.toml"
+
+    def initialize(file = DEFAULT_FILE)
+      @file = file
+
+      init_store
+    end
+
+    def read
+      TomlRB.load_file(@file)
+    end
+
+    def write
+    end
+
+    private
+
+    def init_store
+      return if File.exists?(@file)
+
+      File.open(@file, "w")
+    end
+  end
+
   class Todo
     attr_accessor :items
     attr_reader :store
 
-    def initialize(options = {})
-      @store = options.fetch(:store, "#{ENV['HOME']}/.todos.toml")
-      create_store unless File.exists?(@store)
-
+    def initialize(store = Store.new)
+      @store = store
       @items = load_items
     end
 
@@ -38,12 +61,8 @@ module Nin
 
     private
 
-    def create_store
-      File.open(@store, "w") { |_| }
-    end
-
     def load_items
-      TomlRB.load_file(@store).values.map do |item|
+      @store.read.values.map do |item|
         Item.new(item.fetch('desc'))
       end
     end
