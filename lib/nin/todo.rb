@@ -11,7 +11,9 @@ module Nin
     def list
     end
 
-    def add(todo)
+    def add(body)
+      @items << Item.new(next_id, body)
+      @store.write(to_hash)
     end
 
     def edit(id)
@@ -25,6 +27,21 @@ module Nin
     def load_items
       @store.read.map do |key, value|
         Item.new(key, value.fetch('desc'))
+      end
+    end
+
+    def to_hash
+      @items.reduce({}) do |hash, item|
+        hash[item.id] = { 'desc' => item.body }
+        hash
+      end
+    end
+
+    def next_id
+      begin
+        @items.last.id + 1
+      rescue NoMethodError
+        1
       end
     end
   end

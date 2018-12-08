@@ -12,7 +12,8 @@ module Nin
       }
     end
 
-    def write
+    def write(hash)
+      'Wrote to store successfully'
     end
   end
 
@@ -24,6 +25,24 @@ module Nin
 
     def test_initialize_loads_items
       refute_empty @todo.items
+    end
+
+    def test_add
+      return_msg = @todo.add('Fake Task 3 desc')
+
+      assert_equal @todo.items.count, 3
+      assert_equal @todo.items.last.id, 3
+      assert_equal return_msg, 'Wrote to store successfully'
+    end
+
+    def test_add_first_item
+      @todo.items = []
+
+      return_msg = @todo.add('Fake Task 1')
+
+      assert_equal @todo.items.count, 1
+      assert_equal @todo.items.first.id, 1
+      assert_equal return_msg, 'Wrote to store successfully'
     end
   end
 end
