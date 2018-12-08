@@ -48,16 +48,19 @@ module Nin
       assert_equal 'Wrote to store successfully', return_msg
     end
 
+    require 'byebug'
     def test_update
-      @todo.update(2, 'Fake Task 2 desc updated')
+      return_msg = @todo.update(2, 'Fake Task 2 desc updated')
 
       assert_equal 'Fake Task 2 desc updated', @todo.items.last.desc
+      assert_equal 'Wrote to store successfully', return_msg
     end
 
     def test_delete
-      @todo.delete(2)
+      return_msg = @todo.delete(2)
 
       assert_equal 1, @todo.items.count
+      assert_equal 'Wrote to store successfully', return_msg
     end
   end
 end

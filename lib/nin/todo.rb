@@ -22,11 +22,13 @@ module Nin
     def update(id, new_desc)
       item      = find_by_id(id)
       item.desc = new_desc
+      @store.write(to_hash)
     end
 
     def delete(id)
       item = find_by_id(id)
       @items.delete(item)
+      @store.write(to_hash)
     end
 
     private
