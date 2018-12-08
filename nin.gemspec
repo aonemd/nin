@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
     f.match(%r{^(test|spec|features)/})
   end
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.executables   = ["nin"]
 
   gem.name        = 'nin'
   gem.version     = '0.0.0'
