@@ -30,15 +30,15 @@ module Nin
     def test_list
       output = capture_stdout { @todo.list }
 
-      assert_equal output, "1: Fake Task 1 desc\n2: Fake Task 2 desc\n"
+      assert_equal "1: Fake Task 1 desc\n2: Fake Task 2 desc\n", output
     end
 
     def test_add
       return_msg = @todo.add('Fake Task 3 desc')
 
-      assert_equal @todo.items.count, 3
-      assert_equal @todo.items.last.id, 3
-      assert_equal return_msg, 'Wrote to store successfully'
+      assert_equal 3, @todo.items.count
+      assert_equal 3, @todo.items.last.id
+      assert_equal 'Wrote to store successfully', return_msg
     end
 
     def test_add_first_item
@@ -46,9 +46,9 @@ module Nin
 
       return_msg = @todo.add('Fake Task 1')
 
-      assert_equal @todo.items.count, 1
-      assert_equal @todo.items.first.id, 1
-      assert_equal return_msg, 'Wrote to store successfully'
+      assert_equal 1, @todo.items.count
+      assert_equal 1, @todo.items.first.id
+      assert_equal 'Wrote to store successfully', return_msg
     end
 
     def test_delete
