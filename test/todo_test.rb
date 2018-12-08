@@ -27,6 +27,12 @@ module Nin
       refute_empty @todo.items
     end
 
+    def test_list
+      output = capture_stdout { @todo.list }
+
+      assert_equal output, "1: Fake Task 1 desc\n2: Fake Task 2 desc\n"
+    end
+
     def test_add
       return_msg = @todo.add('Fake Task 3 desc')
 

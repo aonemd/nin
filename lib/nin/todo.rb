@@ -9,6 +9,9 @@ module Nin
     end
 
     def list
+      @items.each do |item|
+        puts item
+      end
     end
 
     def add(desc)
