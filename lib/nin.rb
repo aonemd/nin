@@ -11,9 +11,9 @@ module Nin
     when 'l'
       Nin::Todo.new.list
     when 'a'
-      Nin::Todo.new.add(ARGV[1])
+      Nin::Todo.new.add(ARGV[1..-1].join(' '))
     when 'u'
-      Nin::Todo.new.update(ARGV[1], ARGV[2])
+      Nin::Todo.new.update(ARGV[1], ARGV[2..-1].join(' '))
     when 'd'
       Nin::Todo.new.delete(ARGV[1])
     else
