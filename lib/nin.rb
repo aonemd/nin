@@ -13,9 +13,9 @@ module Nin
     when 'a'
       Nin::Todo.new.add(ARGV[1..-1].join(' '))
     when 'u'
-      Nin::Todo.new.update(ARGV[1], ARGV[2..-1].join(' '))
+      Nin::Todo.new.update(ARGV[1].to_i, ARGV[2..-1].join(' '))
     when 'd'
-      Nin::Todo.new.delete(ARGV[1])
+      Nin::Todo.new.delete(ARGV[1].to_i)
     else
       puts "\nUSAGE: nin COMMAND [arguments...]\n\n"
       puts "COMMANDS:"
