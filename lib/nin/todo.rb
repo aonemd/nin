@@ -41,7 +41,7 @@ module Nin
 
     def load_items
       @store.read.map do |key, value|
-        Item.new(key, value.fetch('desc'), value.fetch('completed'))
+        Item.new(key.to_i, value.fetch('desc'), value.fetch('completed'))
       end
     end
 

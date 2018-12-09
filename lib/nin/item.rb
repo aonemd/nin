@@ -3,7 +3,7 @@ module Nin
     attr_accessor :id, :desc, :completed
 
     def initialize(id, desc, completed = false)
-      @id        = Integer(id)
+      @id        = id
       @desc      = desc
       @completed = completed
     end
