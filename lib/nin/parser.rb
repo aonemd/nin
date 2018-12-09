@@ -3,10 +3,11 @@ module Nin
     def initialize(desc)
       @desc = desc
       @date = extract_date
+      @tags = extract_tags
     end
 
     def call
-      [@desc, @date]
+      [@desc, @date, @tags]
     end
 
     private
@@ -18,6 +19,15 @@ module Nin
       strip_tags(date_pattern)
 
       Chronic.parse(date).strftime('%Y-%m-%d')
+    end
+
+    def extract_tags
+      tag_pattern = /#[A-Z0-9.-]+/i
+      tags        = @desc.scan(tag_pattern).map { |tag| tag.gsub!('#', '') }
+
+      strip_tags(tag_pattern)
+
+      tags
     end
 
     def strip_tags(pattern)
