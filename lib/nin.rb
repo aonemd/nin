@@ -14,6 +14,8 @@ module Nin
       Nin::Todo.new.add(ARGV[1..-1].join(' '))
     when 'u'
       Nin::Todo.new.update(ARGV[1].to_i, ARGV[2..-1].join(' '))
+    when 'c'
+      Nin::Todo.new.complete(ARGV[1].to_i)
     when 'd'
       Nin::Todo.new.delete(ARGV[1].to_i)
     else
@@ -22,6 +24,7 @@ module Nin
       puts "  l             List all todos"
       puts "  a desc        Add a todo"
       puts "  u id desc     Update a todo"
+      puts "  c id          Un/complete a todo"
       puts "  d id          Remove a todo"
     end
   end

@@ -1,14 +1,29 @@
 module Nin
   class Item
-    attr_accessor :id, :desc
+    attr_accessor :id, :desc, :completed
 
-    def initialize(id, desc)
-      @id   = Integer(id)
-      @desc = desc
+    def initialize(id, desc, completed = false)
+      @id        = Integer(id)
+      @desc      = desc
+      @completed = completed
+    end
+
+    def toggle_completed!
+      @completed = !@completed
     end
 
     def to_s
-      "#{@id}: #{@desc}"
+      "#{view_completed} #{@id}: #{@desc}"
+    end
+
+    private
+
+    def view_completed
+      if @completed
+        '[x]'
+      else
+        '[ ]'
+      end
     end
   end
 end

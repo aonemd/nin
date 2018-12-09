@@ -25,6 +25,12 @@ module Nin
       @store.write(to_hash)
     end
 
+    def complete(id)
+      item = find_by_id(id)
+      item.toggle_completed!
+      @store.write(to_hash)
+    end
+
     def delete(id)
       item = find_by_id(id)
       @items.delete(item)
@@ -35,13 +41,13 @@ module Nin
 
     def load_items
       @store.read.map do |key, value|
-        Item.new(key, value.fetch('desc'))
+        Item.new(key, value.fetch('desc'), value.fetch('completed'))
       end
     end
 
     def to_hash
       @items.reduce({}) do |hash, item|
-        hash[item.id] = { 'desc' => item.desc }
+        hash[item.id] = { 'desc' => item.desc, 'completed' => item.completed }
         hash
       end
     end

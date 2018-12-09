@@ -4,8 +4,8 @@ module Nin
   class FakeStore
     def read
       {
-        1 => { 'desc' => 'Fake Task 1 desc' },
-        2 => { 'desc' => 'Fake Task 2 desc' }
+        1 => { 'desc' => 'Fake Task 1 desc', 'completed' => true },
+        2 => { 'desc' => 'Fake Task 2 desc', 'completed' => false }
       }
     end
 
@@ -27,7 +27,7 @@ module Nin
     def test_list
       output = capture_stdout { @todo.list }
 
-      assert_equal "1: Fake Task 1 desc\n2: Fake Task 2 desc\n", output
+      assert_equal "[x] 1: Fake Task 1 desc\n[ ] 2: Fake Task 2 desc\n", output
     end
 
     def test_add
@@ -61,6 +61,12 @@ module Nin
 
       assert_equal 1, @todo.items.count
       assert_equal 'Wrote to store successfully', return_msg
+    end
+
+    def test_complete
+      @todo.complete(2)
+
+      assert @todo.items.last.completed
     end
   end
 end
