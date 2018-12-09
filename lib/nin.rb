@@ -1,7 +1,9 @@
 require 'toml-rb'
+require 'chronic'
 
 require_relative 'nin/version'
 require_relative 'nin/store'
+require_relative 'nin/parser'
 require_relative 'nin/item'
 require_relative 'nin/todo'
 
