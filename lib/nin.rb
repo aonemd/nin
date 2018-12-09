@@ -13,7 +13,6 @@ module Nin
     when 'a'
       Nin::Todo.new.add(ARGV[1])
     when 'u'
-      puts ARGV[2]
       Nin::Todo.new.update(ARGV[1], ARGV[2])
     when 'd'
       Nin::Todo.new.delete(ARGV[1])
