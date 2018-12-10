@@ -27,6 +27,14 @@ module Nin
 
     private
 
+    def view_completed
+      if @completed
+        '[x]'
+      else
+        '[ ]'
+      end
+    end
+
     def view_date
       case @date
       when Date.today.to_s
@@ -37,14 +45,6 @@ module Nin
         'yesterday'
       else
         @date
-      end
-    end
-
-    def view_completed
-      if @completed
-        '[x]'
-      else
-        '[ ]'
       end
     end
   end
