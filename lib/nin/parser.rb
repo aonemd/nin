@@ -14,8 +14,11 @@ module Nin
 
     def extract_date
       date_pattern = /@[A-Z0-9.-]+/i
-      date         = @desc.scan(date_pattern).last.gsub('@', '')
+      date         = @desc.scan(date_pattern).last
 
+      return nil if date.nil?
+
+      date.gsub!('@', '')
       strip_tags(date_pattern)
 
       Chronic.parse(date).strftime('%Y-%m-%d')
@@ -31,7 +34,8 @@ module Nin
     end
 
     def strip_tags(pattern)
-      @desc.gsub!(pattern, '').strip!
+      @desc.gsub!(pattern, '')
+      @desc.strip!
     end
   end
 end
