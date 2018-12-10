@@ -5,8 +5,12 @@ module Nin
     def initialize(id, desc, date = nil, completed = false)
       @id        = id
       @desc      = desc
-      @date      = date || Date.today.to_s
+      self.date  = date # this looks ugly
       @completed = completed
+    end
+
+    def date=(date = nil)
+      @date = date || Date.today.to_s
     end
 
     def toggle_completed!

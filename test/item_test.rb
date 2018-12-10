@@ -9,6 +9,16 @@ module Nin
       @item_generic_date = Item.new(4, 'Item 4', Date.today.succ.succ.to_s)
     end
 
+    def test_set_date_if_nil
+      assert_equal Date.today.to_s, @item_today.date
+    end
+
+    def test_update_date_if_nil
+      @item_today.date = nil
+
+      assert_equal Date.today.to_s, @item_today.date
+    end
+
     def test_toggle_completed
       @item_today.toggle_completed!
 

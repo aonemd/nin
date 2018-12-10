@@ -1,4 +1,4 @@
-require_relative 'test_helper'
+require 'test_helper'
 
 module Nin
   class FakeStore
@@ -36,7 +36,7 @@ module Nin
     end
 
     def test_add
-      return_msg = @todo.add('Fake Task 3 desc')
+      return_msg = @todo.add('Fake Task 3 desc', nil)
 
       assert_equal 3, @todo.items.count
       assert_equal 3, @todo.items.last.id
@@ -46,7 +46,7 @@ module Nin
     def test_add_first_item
       @todo.items = []
 
-      return_msg = @todo.add('Fake Task 1')
+      return_msg = @todo.add('Fake Task 1', nil)
 
       assert_equal 1, @todo.items.count
       assert_equal 1, @todo.items.first.id
@@ -54,7 +54,7 @@ module Nin
     end
 
     def test_update
-      return_msg = @todo.update(2, 'Fake Task 2 desc updated')
+      return_msg = @todo.update(2, 'Fake Task 2 desc updated', nil)
 
       assert_equal 'Fake Task 2 desc updated', @todo.items.last.desc
       assert_equal 'Wrote to store successfully', return_msg

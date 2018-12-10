@@ -14,14 +14,15 @@ module Nin
       end
     end
 
-    def add(desc)
-      @items << Item.new(next_id, desc)
+    def add(desc, date)
+      @items << Item.new(next_id, desc, date)
       @store.write(to_hash)
     end
 
-    def update(id, new_desc)
+    def update(id, desc, date)
       item      = find_by_id(id)
-      item.desc = new_desc
+      item.desc = desc
+      item.date = date
       @store.write(to_hash)
     end
 
