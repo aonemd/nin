@@ -25,9 +25,12 @@ module Nin
     end
 
     def test_list
-      output = capture_stdout { @todo.list }
+      output   = capture_stdout { @todo.list }
+      expected = @todo.items.map do |item|
+        item.to_s << "\n"
+      end.join
 
-      assert_equal "[x] 1: Fake Task 1 desc\n[ ] 2: Fake Task 2 desc\n", output
+      assert_equal expected, output
     end
 
     def test_add

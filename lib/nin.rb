@@ -1,5 +1,6 @@
 require 'toml-rb'
 require 'chronic'
+require 'date'
 
 require_relative 'nin/version'
 require_relative 'nin/store'

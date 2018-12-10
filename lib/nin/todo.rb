@@ -41,7 +41,8 @@ module Nin
 
     def load_items
       @store.read.map do |key, value|
-        Item.new(key.to_i, value.fetch('desc'), value.fetch('completed'))
+        # TODO: Fix loading the date property properly
+        Item.new(key.to_i, value.fetch('desc'), value.fetch('date', nil), value.fetch('completed'))
       end
     end
 
