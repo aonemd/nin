@@ -40,15 +40,20 @@ module Nin
     private
 
     def load_items
-      @store.read.map do |key, value|
-        # TODO: Fix loading the date property properly
-        Item.new(key.to_i, value.fetch('desc'), value.fetch('date', nil), value.fetch('completed'))
+      items = []
+      @store.read.map do |key, values|
+        date = key
+        values.map do |item|
+          items << Item.new(item.fetch('id').to_i, item.fetch('desc'), date, item.fetch('completed'))
+        end
       end
+
+      items
     end
 
     def to_hash
-      @items.reduce({}) do |hash, item|
-        hash[item.id] = { 'desc' => item.desc, 'completed' => item.completed }
+      @items.group_by(&:date).reduce({}) do |hash, (key, values)|
+        hash[key] = values.map(&:to_h)
         hash
       end
     end

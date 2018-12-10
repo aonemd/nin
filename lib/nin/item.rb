@@ -17,6 +17,10 @@ module Nin
       "#{view_completed} #{@id}: @#{view_date} #{@desc}"
     end
 
+    def to_h
+      { 'id' => id, 'desc' => desc, 'completed' => completed }
+    end
+
     private
 
     def view_date

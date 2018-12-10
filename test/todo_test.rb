@@ -1,11 +1,13 @@
-require 'test_helper'
+require_relative 'test_helper'
 
 module Nin
   class FakeStore
     def read
       {
-        1 => { 'desc' => 'Fake Task 1 desc', 'completed' => true },
-        2 => { 'desc' => 'Fake Task 2 desc', 'completed' => false }
+        Date.today.to_s => [
+          { 'id' => 1, 'desc' => 'Fake Task 1 desc', 'completed' => true },
+          { 'id' => 2, 'desc' => 'Fake Task 2 desc', 'completed' => false }
+        ]
       }
     end
 
