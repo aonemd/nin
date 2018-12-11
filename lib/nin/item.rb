@@ -50,7 +50,7 @@ module Nin
     end
 
     def view_tags
-      @tags.map { |tag| tag.prepend('#') }.join(', ')
+      @tags.map { |tag| tag.dup.prepend('#') }.join(', ')
     end
   end
 end
