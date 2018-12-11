@@ -36,7 +36,7 @@ module Nin
     end
 
     def test_add
-      return_msg = @todo.add('Fake Task 3 desc', nil)
+      return_msg = @todo.add('Fake Task 3 desc', nil, [])
 
       assert_equal 3, @todo.items.count
       assert_equal 3, @todo.items.last.id
@@ -46,7 +46,7 @@ module Nin
     def test_add_first_item
       @todo.items = []
 
-      return_msg = @todo.add('Fake Task 1', nil)
+      return_msg = @todo.add('Fake Task 1', nil, ['school'])
 
       assert_equal 1, @todo.items.count
       assert_equal 1, @todo.items.first.id

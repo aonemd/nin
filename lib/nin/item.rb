@@ -23,7 +23,7 @@ module Nin
     end
 
     def to_h
-      { 'id' => id, 'desc' => desc, 'completed' => completed }
+      { 'id' => id, 'desc' => desc, 'tags' => tags, 'completed' => completed }
     end
 
     private

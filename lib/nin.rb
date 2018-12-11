@@ -14,8 +14,8 @@ module Nin
     when 'l'
       Nin::Todo.new.list
     when 'a'
-      desc, date, _ = Parser.new(ARGV[1..-1].join(' ')).call
-      Nin::Todo.new.add(desc, date)
+      desc, date, tags = Parser.new(ARGV[1..-1].join(' ')).call
+      Nin::Todo.new.add(desc, date, tags)
     when 'u'
       desc, date, _ = Parser.new(ARGV[2..-1].join(' ')).call
       Nin::Todo.new.update(ARGV[1].to_i, desc, date)

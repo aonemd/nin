@@ -14,8 +14,8 @@ module Nin
       end
     end
 
-    def add(desc, date)
-      @items << Item.new(next_id, desc, date)
+    def add(desc, date, tags)
+      @items << Item.new(next_id, desc, date, tags)
       @store.write(to_hash)
     end
 
