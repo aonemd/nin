@@ -54,7 +54,7 @@ module Nin
     end
 
     def test_update
-      return_msg = @todo.update(2, 'Fake Task 2 desc updated', nil)
+      return_msg = @todo.update(2, 'Fake Task 2 desc updated', nil, ['school'])
 
       assert_equal 'Fake Task 2 desc updated', @todo.items.last.desc
       assert_equal 'Wrote to store successfully', return_msg
