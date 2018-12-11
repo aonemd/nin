@@ -19,7 +19,7 @@ module Nin
       @store.write(to_hash)
     end
 
-    def update(id, desc, date, tags)
+    def edit(id, desc, date, tags)
       item      = find_by_id(id)
       item.desc = desc
       item.date = date

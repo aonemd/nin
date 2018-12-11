@@ -14,9 +14,9 @@ module Nin
       when 'a'
         desc, date, tags = Parser.new(@args.join(' ')).call
         @todo.add(desc, date, tags)
-      when 'u'
+      when 'e'
         desc, date, tags = Parser.new(@args[1..-1].join(' ')).call
-        @todo.update(@args[0].to_i, desc, date, tags)
+        @todo.edit(@args[0].to_i, desc, date, tags)
       when 'c'
         @todo.complete(@args[0].to_i)
       when 'd'
