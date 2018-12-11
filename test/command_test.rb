@@ -6,7 +6,7 @@ module Nin
     end
 
     def test_print_usage_by_default
-      @command = Nin::Command.new('anything')
+      @command = Nin::Command.new('anything', [])
 
       output = capture_stdout { @command.call }
 
