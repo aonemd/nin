@@ -44,7 +44,7 @@ module Nin
     def load_items
       items = []
       @store.read.map do |key, values|
-        date = key
+        date = key.dup
         values.map do |item|
           items << Item.new(item.fetch('id').to_i,
                             item.fetch('desc'),
