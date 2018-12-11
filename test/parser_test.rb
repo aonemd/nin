@@ -1,4 +1,4 @@
-require 'date'
+require 'test_helper'
 
 module Nin
   class ParserTest < Minitest::Test

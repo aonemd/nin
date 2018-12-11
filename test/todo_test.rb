@@ -27,19 +27,20 @@ module Nin
     end
 
     def test_list
-      output   = capture_stdout { @todo.list }
       expected = @todo.items.map do |item|
         item.to_s << "\n"
       end.join
 
-      assert_equal expected, output
+      assert_output(expected) { @todo.list }
     end
 
     def test_add
-      return_msg = @todo.add('Fake Task 3 desc', nil, [])
+      old_item_count = @todo.items.count
+      last_id        = @todo.items.last.id
+      return_msg     = @todo.add('Fake Task 3 desc', nil, [])
 
-      assert_equal 3, @todo.items.count
-      assert_equal 3, @todo.items.last.id
+      assert_equal 1, @todo.items.count - old_item_count
+      assert_equal 1, @todo.items.last.id - last_id
       assert_equal 'Wrote to store successfully', return_msg
     end
 
@@ -54,23 +55,24 @@ module Nin
     end
 
     def test_update
-      return_msg = @todo.update(2, 'Fake Task 2 desc updated', nil, ['school'])
+      return_msg = @todo.update(2, 'Fake Task 2 desc updated', nil, [])
 
       assert_equal 'Fake Task 2 desc updated', @todo.items.last.desc
       assert_equal 'Wrote to store successfully', return_msg
     end
 
     def test_delete
-      return_msg = @todo.delete(2)
+      old_item_count = @todo.items.count
+      return_msg     = @todo.delete(2)
 
-      assert_equal 1, @todo.items.count
+      assert_equal 1, old_item_count - @todo.items.count
       assert_equal 'Wrote to store successfully', return_msg
     end
 
     def test_complete
       @todo.complete(2)
 
-      assert @todo.items.last.completed
+      assert @todo.items[1].completed
     end
   end
 end
