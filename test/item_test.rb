@@ -7,6 +7,7 @@ module Nin
       @item_tomorrow     = Item.new(2, 'Item 2', Date.today.succ.to_s)
       @item_yesterday    = Item.new(3, 'Item 3', Date.today.prev_day.to_s)
       @item_generic_date = Item.new(4, 'Item 4', Date.today.succ.succ.to_s)
+      @item_with_tags    = Item.new(5, 'Item 5', nil, ['school'])
     end
 
     def test_set_date_if_nil
@@ -39,6 +40,10 @@ module Nin
 
     def test_to_s_with_generic_date
       assert_equal "[ ] 4: @#{Date.today.succ.succ.to_s} Item 4", @item_generic_date.to_s
+    end
+
+    def test_to_s_with_tags
+      assert_equal "[ ] 5: @today #school Item 5", @item_with_tags.to_s
     end
   end
 end

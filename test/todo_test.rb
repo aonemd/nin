@@ -5,8 +5,8 @@ module Nin
     def read
       {
         Date.today.to_s => [
-          { 'id' => 1, 'desc' => 'Fake Task 1 desc', 'completed' => true },
-          { 'id' => 2, 'desc' => 'Fake Task 2 desc', 'completed' => false }
+          { 'id' => 1, 'desc' => 'Fake Task 1 desc', 'tags' => ['school'], 'completed' => true },
+          { 'id' => 2, 'desc' => 'Fake Task 2 desc', 'tags' => [], 'completed' => false }
         ]
       }
     end

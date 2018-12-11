@@ -1,11 +1,12 @@
 module Nin
   class Item
-    attr_accessor :id, :desc, :date, :completed
+    attr_accessor :id, :desc, :date, :tags, :completed
 
-    def initialize(id, desc, date = nil, completed = false)
+    def initialize(id, desc, date = nil, tags = [], completed = false)
       @id        = id
       @desc      = desc
       self.date  = date # this looks ugly
+      @tags      = tags
       @completed = completed
     end
 
@@ -18,7 +19,7 @@ module Nin
     end
 
     def to_s
-      "#{view_completed} #{@id}: @#{view_date} #{@desc}"
+      "#{view_completed} #{@id}: @#{view_date} #{view_tags} #{@desc}".gsub('  ', ' ')
     end
 
     def to_h
@@ -46,6 +47,10 @@ module Nin
       else
         @date
       end
+    end
+
+    def view_tags
+      @tags.map { |tag| tag.prepend('#') }.join(', ')
     end
   end
 end

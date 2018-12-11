@@ -45,7 +45,12 @@ module Nin
       @store.read.map do |key, values|
         date = key
         values.map do |item|
-          items << Item.new(item.fetch('id').to_i, item.fetch('desc'), date, item.fetch('completed'))
+          items << Item.new(item.fetch('id').to_i,
+                            item.fetch('desc'),
+                            date,
+                            item.fetch('tags'),
+                            item.fetch('completed')
+                           )
         end
       end
 
