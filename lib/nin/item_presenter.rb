@@ -1,7 +1,8 @@
 module Nin
   class ItemPresenter < SimpleDelegator
     def call
-      "#{completed} #{id}: #{date} #{tags} #{desc}".gsub('  ', ' ')
+      sprintf("%d \t%-10s %-10s \t%s %s",
+              id, completed, date, desc, tags).gsub('  ', ' ')
     end
 
     private
