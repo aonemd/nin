@@ -27,7 +27,7 @@ module Nin
         puts "COMMANDS:"
         puts "  l             List all todos"
         puts "  a desc        Add a todo"
-        puts "  u id desc     Update a todo"
+        puts "  e id desc     Edit a todo"
         puts "  c id          Un/complete a todo"
         puts "  d id          Remove a todo"
       end
