@@ -43,6 +43,7 @@ module Nin
 
     def test_to_s_with_generic_date
       assert @item_generic_date.to_s.include?(Date.today.succ.succ.to_s)
+      assert @item_generic_date.to_s.include?('@')
     end
 
     def test_to_s_with_tags
