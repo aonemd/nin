@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
   gem.license = 'MIT'
 
   gem.add_dependency 'toml-rb'
+  gem.add_dependency 'chronic'
 
   gem.add_development_dependency 'byebug'
   gem.add_development_dependency 'minitest'
