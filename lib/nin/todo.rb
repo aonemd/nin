@@ -5,7 +5,7 @@ module Nin
 
     def initialize(store = Store.new)
       @store = store
-      @items = load_items
+      @items = load_items.sort_by(&:id)
     end
 
     def list
