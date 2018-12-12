@@ -25,7 +25,7 @@ module Nin
     end
 
     def extract_tags
-      tag_pattern = /#[A-Z0-9.-]+/i
+      tag_pattern = /#[A-Z0-9_]+/i
       tags        = @desc.scan(tag_pattern).map { |tag| tag.gsub!('#', '') }
 
       strip_tags(tag_pattern)
