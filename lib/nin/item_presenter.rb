@@ -1,7 +1,7 @@
 module Nin
   class ItemPresenter < SimpleDelegator
     def call
-      sprintf("%d \t%-10s %-10s \t%s %s",
+      sprintf("%d \t%s \t%-40s \t%-10s %s",
               id, completed, date, desc, tags).gsub('  ', ' ')
     end
 
@@ -9,7 +9,7 @@ module Nin
 
     def completed
       if self.completed
-        '[x]'
+        '[x]'.green
       else
         '[ ]'
       end
@@ -18,18 +18,22 @@ module Nin
     def date
       case self.date
       when Date.today.to_s
-        'today'
+        '@today'.bold
       when Date.today.succ.to_s
-        'tomorrow'
+        '@tomorrow'
       when Date.today.prev_day.to_s
-        'yesterday'
+        '@yesterday'
       else
-        self.date
-      end.prepend('@')
+        if self.date < Date.today.to_s
+          ('@' << self.date).red
+        else
+          '@' << self.date
+        end
+      end.cyan
     end
 
     def tags
-      self.tags.map { |tag| tag.dup.prepend('#') }.join(', ')
+      self.tags.map { |tag| tag.dup.prepend('#') }.join(', ').blue
     end
   end
 end

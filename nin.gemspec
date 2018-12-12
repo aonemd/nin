@@ -20,6 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'toml-rb'
   gem.add_dependency 'chronic'
+  gem.add_dependency 'colored2'
 
   gem.add_development_dependency 'byebug'
   gem.add_development_dependency 'minitest'

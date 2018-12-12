@@ -1,14 +1,18 @@
 PATH
   remote: .
   specs:
-    nin (0.0.0)
+    nin (0.5.0)
+      chronic
+      colored2
       toml-rb
 
 GEM
   remote: https://rubygems.org/
   specs:
     byebug (10.0.2)
+    chronic (0.10.2)
     citrus (3.0.2)
+    colored2 (3.1.2)
     minitest (5.11.3)
     toml-rb (1.1.2)
       citrus (~> 3.0, > 3.0)
