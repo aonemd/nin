@@ -7,6 +7,14 @@ module Nin
 
     private
 
+    def desc
+      if self.archived
+        self.desc.yellow
+      else
+        self.desc
+      end
+    end
+
     def completed
       if self.completed
         '[x]'.green
