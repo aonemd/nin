@@ -20,7 +20,7 @@ module Nin
             'archived' => false
           }
         ],
-        Date.today.prev_day.to_s => [
+        Date.today.succ.to_s => [
           {
             'id' => 3,
             'desc' => 'Fake Task 3 desc',
@@ -90,9 +90,9 @@ module Nin
     end
 
     def test_edit
-      return_msg = @todo.edit(2, 'Fake Task 2 desc editd', nil, [])
+      return_msg = @todo.edit(3, 'Fake Task 3 desc editd', nil, [])
 
-      assert_equal 'Fake Task 2 desc editd', @todo.items.last.desc
+      assert_equal 'Fake Task 3 desc editd', @todo.items.last.desc
       assert_equal 'Wrote to store successfully', return_msg
     end
 
@@ -108,6 +108,12 @@ module Nin
       @todo.complete(2)
 
       assert @todo.items[1].completed
+    end
+
+    def test_archive
+      @todo.archive(2)
+
+      assert @todo.items[1].archived
     end
   end
 end

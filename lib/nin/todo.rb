@@ -38,6 +38,12 @@ module Nin
       @store.write(to_hash)
     end
 
+    def archive(id)
+      item = find_by_id(id)
+      item.toggle_archived!
+      @store.write(to_hash)
+    end
+
     def delete(id)
       item = find_by_id(id)
       @items.delete(item)
