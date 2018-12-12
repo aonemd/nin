@@ -5,11 +5,29 @@ module Nin
     def read
       {
         Date.today.to_s => [
-          { 'id' => 1, 'desc' => 'Fake Task 1 desc', 'tags' => ['school'], 'completed' => true },
-          { 'id' => 2, 'desc' => 'Fake Task 2 desc', 'tags' => [], 'completed' => false }
+          {
+            'id' => 1,
+            'desc' => 'Fake Task 1 desc',
+            'tags' => ['school'],
+            'completed' => true,
+            'archived' => false
+          },
+          {
+            'id' => 2,
+            'desc' => 'Fake Task 2 desc',
+            'tags' => [],
+            'completed' => false,
+            'archived' => false
+          }
         ],
         Date.today.prev_day.to_s => [
-          { 'id' => 3, 'desc' => 'Fake Task 3 desc', 'tags' => ['fake_tag'], 'completed' => true }
+          {
+            'id' => 3,
+            'desc' => 'Fake Task 3 desc',
+            'tags' => ['fake_tag'],
+            'completed' => true,
+            'archived' => true
+          }
         ]
       }
     end
@@ -33,7 +51,17 @@ module Nin
       assert ascending?(@todo.items, :date)
     end
 
-    def test_list
+    def test_list_archived_only_by_default
+      expected = @todo.items.select { |item| !item.archived }.map do |item|
+        item.to_s << "\n"
+      end.join
+
+      assert_output(expected) { @todo.list }
+    end
+
+    def test_list_all_with_archived
+      @todo.instance_variable_set(:@options, { archived: true })
+
       expected = @todo.items.map do |item|
         item.to_s << "\n"
       end.join

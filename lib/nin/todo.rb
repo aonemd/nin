@@ -3,13 +3,18 @@ module Nin
     attr_accessor :items
     attr_reader :store
 
-    def initialize(store = Store.new)
-      @store = store
-      @items = load_items.sort_by(&:date)
+    def initialize(store = Store.new, options = {})
+      @store   = store
+      @options = options
+      @items   = load_items.sort_by(&:date)
     end
 
     def list
-      @items.each do |item|
+      if @options[:archived]
+        @items
+      else
+        unarchived_items
+      end.each do |item|
         puts item
       end
     end
@@ -50,7 +55,8 @@ module Nin
                             item.fetch('desc'),
                             date,
                             item.fetch('tags'),
-                            item.fetch('completed')
+                            item.fetch('completed'),
+                            item.fetch('archived')
                            )
         end
       end
@@ -75,6 +81,10 @@ module Nin
 
     def find_by_id(id)
       @items.find { |item| item.id == id }
+    end
+
+    def unarchived_items
+      @items.select { |item| !item.archived }
     end
   end
 end
