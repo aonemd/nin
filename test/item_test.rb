@@ -8,6 +8,7 @@ module Nin
       @item_yesterday    = Item.new(3, 'Item 3', Date.today.prev_day.to_s)
       @item_generic_date = Item.new(4, 'Item 4', Date.today.succ.succ.to_s)
       @item_with_tags    = Item.new(5, 'Item 5', nil, ['school'])
+      @archived_item     = Item.new(6, 'Item 6', nil, [], true, true)
     end
 
     def test_set_date_if_nil
@@ -24,6 +25,12 @@ module Nin
       @item_today.toggle_completed!
 
       assert @item_today.completed
+    end
+
+    def test_toggle_archived
+      @archived_item.toggle_archived!
+
+      refute @archived_item.archived
     end
 
     def test_to_s
