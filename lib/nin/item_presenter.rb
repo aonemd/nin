@@ -33,7 +33,7 @@ module Nin
     end
 
     def tags
-      self.tags.map { |tag| tag.dup.prepend('#') }.join(', ').blue
+      self.tags.map { |tag| tag.dup.prepend('#') }.join(' ').blue
     end
   end
 end
