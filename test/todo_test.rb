@@ -7,6 +7,9 @@ module Nin
         Date.today.to_s => [
           { 'id' => 1, 'desc' => 'Fake Task 1 desc', 'tags' => ['school'], 'completed' => true },
           { 'id' => 2, 'desc' => 'Fake Task 2 desc', 'tags' => [], 'completed' => false }
+        ],
+        Date.today.prev_day.to_s => [
+          { 'id' => 3, 'desc' => 'Fake Task 3 desc', 'tags' => ['fake_tag'], 'completed' => true }
         ]
       }
     end
@@ -24,6 +27,10 @@ module Nin
 
     def test_initialize_loads_items
       refute_empty @todo.items
+    end
+
+    def test_initialize_orders_items_by_date
+      assert ascending?(@todo.items, :date)
     end
 
     def test_list
