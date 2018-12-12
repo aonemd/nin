@@ -3,7 +3,7 @@ module Nin
     def initialize(command, args)
       @command = command
       @args    = args
-      @todo    = Todo.new
+      @todo    = Todo.new(Store.new, collect_options)
 
       validate_args_for_add_and_edit
     end
@@ -25,7 +25,7 @@ module Nin
       else
         puts "\nUSAGE: nin COMMAND [arguments...]\n\n"
         puts "COMMANDS:"
-        puts "  l             List all todos"
+        puts "  l [a]         List all unarchived todos. Pass optional argument `a` to list all todos"
         puts "  a desc        Add a todo"
         puts "  e id desc     Edit a todo"
         puts "  c id          Un/complete a todo"
@@ -34,6 +34,16 @@ module Nin
     end
 
     private
+
+    def collect_options
+      options = { archived: false }
+
+      if @command == 'l' && @args[0] == 'a'
+        options[:archived] = true
+      end
+
+      options
+    end
 
     def validate_args_for_add_and_edit
       if (@command == 'a' || @command == 'e') && @args.empty?
