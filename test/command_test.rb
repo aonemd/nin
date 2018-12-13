@@ -14,13 +14,13 @@ module Nin
     end
 
     def test_add_empty_item
-      assert_raises("Command arguments cannot be empty!") do
+      assert_raises(EmptyCommandArgumentError) do
         @command = Nin::Command.new('a', [])
       end
     end
 
     def test_edit_empty_item
-      assert_raises("Command arguments cannot be empty!") do
+      assert_raises(EmptyCommandArgumentError) do
         @command = Nin::Command.new('e', [])
       end
     end

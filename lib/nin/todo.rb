@@ -86,7 +86,11 @@ module Nin
     end
 
     def find_by_id(id)
-      @items.find { |item| item.id == id }
+      found_item = @items.find { |item| item.id == id }
+
+      raise ItemNotFoundError unless found_item
+
+      found_item
     end
 
     def unarchived_items

@@ -96,6 +96,12 @@ module Nin
       assert_equal 'Wrote to store successfully', return_msg
     end
 
+    def test_edit_not_found
+      assert_raises ItemNotFoundError do
+        @todo.edit(50, 'Not Found Fake Task', nil, [])
+      end
+    end
+
     def test_delete
       old_item_count = @todo.items.count
       return_msg     = @todo.delete(2)
@@ -104,16 +110,34 @@ module Nin
       assert_equal 'Wrote to store successfully', return_msg
     end
 
+    def test_delete_not_found
+      assert_raises ItemNotFoundError do
+        @todo.delete(50)
+      end
+    end
+
     def test_complete
       @todo.complete(2)
 
       assert @todo.items[1].completed
     end
 
+    def test_complete_not_found
+      assert_raises ItemNotFoundError do
+        @todo.complete(50)
+      end
+    end
+
     def test_archive
       @todo.archive(2)
 
       assert @todo.items[1].archived
+    end
+
+    def test_archive_not_found
+      assert_raises ItemNotFoundError do
+        @todo.archive(50)
+      end
     end
   end
 end

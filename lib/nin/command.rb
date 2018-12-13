@@ -1,11 +1,13 @@
 module Nin
   class Command
+    COMMANDS_WITH_ARGS = %w(a e c ac d)
+
     def initialize(command, args)
       @command = command
       @args    = args
       @todo    = Todo.new(Store.new, collect_options)
 
-      validate_args_for_add_and_edit
+      validate_args
     end
 
     def call
@@ -48,9 +50,9 @@ module Nin
       options
     end
 
-    def validate_args_for_add_and_edit
-      if (@command == 'a' || @command == 'e') && @args.empty?
-        raise "Command arguments cannot be empty!"
+    def validate_args
+      COMMANDS_WITH_ARGS.each do |command|
+        raise EmptyCommandArgumentError if @command == command && @args.empty?
       end
     end
   end
