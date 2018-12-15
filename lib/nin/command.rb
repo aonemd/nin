@@ -34,10 +34,10 @@ module Nin
         puts "  l  [a]         List all unarchived todos. Pass optional argument `a` to list all todos"
         puts "  a  desc        Add a todo"
         puts "  e  id desc     Edit a todo"
-        puts "  c  ids         Un/complete a todo"
-        puts "  ac ids         Un/archive a todo"
-        puts "  d  ids         Remove a todo"
-        puts "  o              Open todo file"
+        puts "  c  id(s)       Un/complete todo(s)"
+        puts "  ac id(s)       Un/archive todo(s)"
+        puts "  d  id(s)       Delete todo(s)"
+        puts "  o              Open todo file in $EDITOR"
       end
     end
 
