@@ -5,7 +5,7 @@ module Nin
     def initialize(command, args)
       @command = command
       @args    = args
-      @todo    = Todo.new(TomlStore.new, collect_options)
+      @todo    = Todo.new(YamlStore.new, collect_options)
 
       validate_args
     end
