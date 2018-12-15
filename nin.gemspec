@@ -4,8 +4,8 @@ require File.expand_path('../lib/nin/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors     = ["Ahmed Saleh"]
   gem.email       = 'aonemdsaleh@gmail.com'
-  gem.description = "Under construction"
-  gem.summary     = "Under construction"
+  gem.description = "A simple, full-featured command line todo app"
+  gem.summary     = "A command line todo app that provides an easy to use CLI for everyday todo management"
   gem.homepage    = 'https://github.com/aonemd/nin'
 
   gem.files         = `git ls-files`.split($\).reject do |f|
