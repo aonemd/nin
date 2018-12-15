@@ -1,10 +1,10 @@
 require 'test_helper'
 
 module Nin
-  class StoreTest < Minitest::Test
+  class TomlStoreTest < Minitest::Test
     def setup
       @file  = File.expand_path('./test/todos.toml')
-      @store = Store.new(@file)
+      @store = TomlStore.new(@file)
       @hash  = {
         1 => { 'desc' => 'Task 1 desc' },
         2 => { 'desc' => 'Task 2 desc' }

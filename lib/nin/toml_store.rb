@@ -1,5 +1,5 @@
 module Nin
-  class Store
+  class TomlStore
     DEFAULT_FILE = "#{ENV['HOME']}/.todos.toml"
 
     def initialize(file = DEFAULT_FILE)
