@@ -2,6 +2,8 @@ module Nin
   class TomlStore
     DEFAULT_FILE = "#{ENV['HOME']}/.todos.toml"
 
+    attr_reader :file
+
     def initialize(file = DEFAULT_FILE)
       @file = file
 

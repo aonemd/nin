@@ -26,6 +26,8 @@ module Nin
         @todo.archive(*@args)
       when 'd'
         @todo.delete(*@args)
+      when 'o'
+        system("`echo $EDITOR` #{@todo.store.file}")
       else
         puts "\nUSAGE: nin COMMAND [arguments...]\n\n"
         puts "COMMANDS:"
@@ -35,6 +37,7 @@ module Nin
         puts "  c  ids         Un/complete a todo"
         puts "  ac ids         Un/archive a todo"
         puts "  d  ids         Remove a todo"
+        puts "  o              Open todo file"
       end
     end
 

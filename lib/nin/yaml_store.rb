@@ -2,6 +2,8 @@ module Nin
   class YamlStore
     DEFAULT_FILE = "#{ENV['HOME']}/.todos.yaml"
 
+    attr_reader :file
+
     def initialize(file = DEFAULT_FILE)
       @file = file
 
