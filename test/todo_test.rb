@@ -116,16 +116,22 @@ module Nin
 
     def test_delete
       old_item_count = @todo.items.count
-      return_msg     = @todo.delete(2)
+      @todo.delete(2)
 
       assert_equal 1, old_item_count - @todo.items.count
-      assert_equal 'Wrote to store successfully', return_msg
     end
 
     def test_delete_not_found
       assert_raises ItemNotFoundError do
         @todo.delete(50)
       end
+    end
+
+    def test_delete_multiple_items
+      old_item_count = @todo.items.count
+      @todo.delete(2, 3)
+
+      assert_equal 2, old_item_count - @todo.items.count
     end
 
     def test_complete
@@ -138,6 +144,13 @@ module Nin
       assert_raises ItemNotFoundError do
         @todo.complete(50)
       end
+    end
+
+    def test_complete_multiple_items
+      @todo.complete(2, 4)
+
+      assert @todo.items[1].completed
+      assert @todo.items[3].completed
     end
 
     def test_archive
@@ -153,6 +166,13 @@ module Nin
       assert_raises ItemNotFoundError do
         @todo.archive(50)
       end
+    end
+
+    def test_archive_multiple_items
+      @todo.archive(1, 2)
+
+      assert @todo.items[1].archived
+      assert @todo.items[2].archived
     end
   end
 end

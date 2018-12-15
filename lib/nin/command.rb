@@ -21,20 +21,20 @@ module Nin
         desc, date, tags = Parser.new(@args[1..-1].join(' ')).call
         @todo.edit(@args[0].to_i, desc, date, tags)
       when 'c'
-        @todo.complete(@args[0].to_i)
+        @todo.complete(*@args)
       when 'ac'
-        @todo.archive(@args[0].to_i)
+        @todo.archive(*@args)
       when 'd'
-        @todo.delete(@args[0].to_i)
+        @todo.delete(*@args)
       else
         puts "\nUSAGE: nin COMMAND [arguments...]\n\n"
         puts "COMMANDS:"
         puts "  l  [a]         List all unarchived todos. Pass optional argument `a` to list all todos"
         puts "  a  desc        Add a todo"
         puts "  e  id desc     Edit a todo"
-        puts "  c  id          Un/complete a todo"
-        puts "  ac id          Un/archive a todo"
-        puts "  d  id          Remove a todo"
+        puts "  c  ids         Un/complete a todo"
+        puts "  ac ids         Un/archive a todo"
+        puts "  d  ids         Remove a todo"
       end
     end
 

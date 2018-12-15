@@ -32,22 +32,28 @@ module Nin
       @store.write(to_hash)
     end
 
-    def complete(id)
-      item = find_by_id(id)
-      item.toggle_completed!
-      @store.write(to_hash)
+    def complete(*ids)
+      ids.each do |id|
+        item = find_by_id(id.to_i)
+        item.toggle_completed!
+        @store.write(to_hash)
+      end
     end
 
-    def archive(id)
-      item = find_by_id(id)
-      item.toggle_archived!
-      @store.write(to_hash)
+    def archive(*ids)
+      ids.each do |id|
+        item = find_by_id(id.to_i)
+        item.toggle_archived!
+        @store.write(to_hash)
+      end
     end
 
-    def delete(id)
-      item = find_by_id(id)
-      @items.delete(item)
-      @store.write(to_hash)
+    def delete(*ids)
+      ids.each do |id|
+        item = find_by_id(id.to_i)
+        @items.delete(item)
+        @store.write(to_hash)
+      end
     end
 
     private
