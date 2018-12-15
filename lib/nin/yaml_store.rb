@@ -9,7 +9,7 @@ module Nin
     end
 
     def read
-      Psych.load_file(@file) || {}    # Pyshc returns false if the file is empty
+      Psych.load_file(@file) || {}    # Psych returns false if the file is empty
     end
 
     def write(hash)
