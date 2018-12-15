@@ -34,3 +34,7 @@ then fonud [Todolist](http://todolist.site/) which I took some inspiration from
 but kept the CLI as simple as it is in Todo.rb. I also didn't like that
 todolist uses JSON to store the todo items because I wanted to view the file on
 my phone and I needed something more readable.
+
+## License
+
+See [LICENSE](https://github.com/aonemd/nin/blob/master/LICENSE).
