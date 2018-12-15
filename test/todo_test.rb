@@ -20,6 +20,15 @@ module Nin
             'archived' => false
           }
         ],
+        Date.today.prev_day.to_s => [
+          {
+            'id' => 4,
+            'desc' => 'Fake Task 4 desc',
+            'tags' => ['fake_tag'],
+            'completed' => false,
+            'archived' => false
+          }
+        ],
         Date.today.succ.to_s => [
           {
             'id' => 3,
@@ -71,11 +80,14 @@ module Nin
 
     def test_add
       old_item_count = @todo.items.count
-      last_id        = @todo.items.last.id
-      return_msg     = @todo.add('Fake Task 3 desc', nil, [])
+      last_id        = @todo.items.sort_by(&:id).last.id
+
+      return_msg  = @todo.add('Fake Task 5 desc', nil, [])
+      new_last_id = @todo.send(:last_id)
 
       assert_equal 1, @todo.items.count - old_item_count
-      assert_equal 1, @todo.items.last.id - last_id
+      assert_equal 1, new_last_id - last_id
+      assert_equal last_id + 1, new_last_id
       assert_equal 'Wrote to store successfully', return_msg
     end
 
@@ -129,7 +141,10 @@ module Nin
     end
 
     def test_archive
-      @todo.archive(2)
+      id = @todo.items[1].id
+
+      @todo.archive(id)
+
 
       assert @todo.items[1].archived
     end

@@ -78,10 +78,14 @@ module Nin
     end
 
     def next_id
+      last_id + 1
+    end
+
+    def last_id
       begin
-        @items.last.id + 1
+        @items.sort_by(&:id).last.id
       rescue NoMethodError
-        1
+        0
       end
     end
 
