@@ -1,3 +1,4 @@
+require 'psych'
 require 'toml-rb'
 require 'chronic'
 require 'colored2'
@@ -5,6 +6,7 @@ require 'date'
 
 require_relative 'nin/version'
 require_relative 'nin/error'
+require_relative 'nin/yaml_store'
 require_relative 'nin/toml_store'
 require_relative 'nin/parser'
 require_relative 'nin/item_presenter'
