@@ -29,15 +29,16 @@ module Nin
       when 'o'
         system("`echo $EDITOR` #{@todo.store.file}")
       else
-        puts "\nUSAGE: nin COMMAND [arguments...]\n\n"
-        puts "COMMANDS:"
-        puts "  l  [a]         List all unarchived todos. Pass optional argument `a` to list all todos"
-        puts "  a  desc        Add a todo"
-        puts "  e  id desc     Edit a todo"
-        puts "  c  id(s)       Un/complete todo(s)"
-        puts "  ac id(s)       Un/archive todo(s)"
-        puts "  d  id(s)       Delete todo(s)"
-        puts "  o              Open todo file in $EDITOR"
+        puts "NAME:\n\tnin - a simple, full-featured command line todo app"
+        puts "\nUSAGE:\n\tnin COMMAND [arguments...]"
+        puts "\nCOMMANDS:"
+        puts "\tl  [a]         List all unarchived todos. Pass optional argument `a` to list all todos"
+        puts "\ta  desc        Add a todo"
+        puts "\te  id desc     Edit a todo"
+        puts "\tc  id(s)       Un/complete todo(s)"
+        puts "\tac id(s)       Un/archive todo(s)"
+        puts "\td  id(s)       Delete todo(s)"
+        puts "\to              Open todo file in $EDITOR"
       end
     end
 

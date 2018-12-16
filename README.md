@@ -12,16 +12,20 @@ gem install nin
 ## Usage
 
 ```console
-USAGE: nin COMMAND [arguments...]
+NAME:
+        nin - a simple, full-featured command line todo app
+
+USAGE:
+        nin COMMAND [arguments...]
 
 COMMANDS:
-  l  [a]         List all unarchived todos. Pass optional argument `a` to list all todos
-  a  desc        Add a todo
-  e  id desc     Edit a todo
-  c  id(s)       Un/complete todo(s)
-  ac id(s)       Un/archive todo(s)
-  d  id(s)       Delete todo(s)
-  o              Open todo file in $EDITOR
+        l  [a]         List all unarchived todos. Pass optional argument `a` to list all todos
+        a  desc        Add a todo
+        e  id desc     Edit a todo
+        c  id(s)       Un/complete todo(s)
+        ac id(s)       Un/archive todo(s)
+        d  id(s)       Delete todo(s)
+        o              Open todo file in $EDITOR
 ```
 
 ## Why
