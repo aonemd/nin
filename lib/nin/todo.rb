@@ -36,16 +36,18 @@ module Nin
       ids.each do |id|
         item = find_by_id(id.to_i)
         item.toggle_completed!
-        @store.write(to_hash)
       end
+
+      @store.write(to_hash)
     end
 
     def archive(*ids)
       ids.each do |id|
         item = find_by_id(id.to_i)
         item.toggle_archived!
-        @store.write(to_hash)
       end
+
+      @store.write(to_hash)
     end
 
     def delete_archived
@@ -57,8 +59,9 @@ module Nin
       ids.each do |id|
         item = find_by_id(id.to_i)
         @items.delete(item)
-        @store.write(to_hash)
       end
+
+      @store.write(to_hash)
     end
 
     private
