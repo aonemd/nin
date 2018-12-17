@@ -3,6 +3,8 @@ nin
 
 A simple, full-featured command line todo app
 
+![nin demo GIF](/demo.gif)
+
 ## Installation
 
 ```bash
