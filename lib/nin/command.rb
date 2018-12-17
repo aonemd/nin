@@ -35,12 +35,12 @@ module Nin
         puts "\nUSAGE:\n\tnin COMMAND [arguments...]"
         puts "\nCOMMANDS:"
         puts "\tl  [a]         List all unarchived todos. Pass optional argument `a` to list all todos"
-        puts "\ta  desc        Add a todo"
-        puts "\te  id desc     Edit a todo"
+        puts "\ta  desc        Add a todo. Prepend due date by a @. Prepend each tag by a \\#"
+        puts "\te  id desc     Edit a todo. Prepend due date by a @. Prepend each tag by a \\#"
         puts "\tc  id(s)       Un/complete todo(s)"
         puts "\tac id(s)       Un/archive todo(s)"
         puts "\td  id(s)       Delete todo(s)"
-        puts "\tgc             Delete all archived todos. Resets item ids"
+        puts "\tgc             Delete all archived todos. Resets item ids as a side effect"
         puts "\to              Open todo file in $EDITOR"
       end
     end

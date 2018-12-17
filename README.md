@@ -20,12 +20,12 @@ USAGE:
 
 COMMANDS:
         l  [a]         List all unarchived todos. Pass optional argument `a` to list all todos
-        a  desc        Add a todo
-        e  id desc     Edit a todo
+        a  desc        Add a todo. Prepend due date by an @. Prepend tag by a \#
+        e  id desc     Edit a todo. Prepend due date by an @. Prepend tag by a \#
         c  id(s)       Un/complete todo(s)
         ac id(s)       Un/archive todo(s)
         d  id(s)       Delete todo(s)
-        gc             Delete all archived todos
+        gc             Delete all archived todos. Resets item ids as a side effect
         o              Open todo file in $EDITOR
 ```
 
