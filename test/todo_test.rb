@@ -155,6 +155,16 @@ module Nin
       assert @todo.items[2].archived
     end
 
+    def test_delete_archived
+      old_item_count      = @todo.items.count
+      archived_item_count = @todo.send(:archived_items).count
+
+      @todo.delete_archived
+
+      assert_equal archived_item_count, old_item_count - @todo.items.count
+      assert_equal @todo.items.map(&:id), (1..@todo.items.count).to_a
+    end
+
     def test_delete
       old_item_count = @todo.items.count
       @todo.delete(2)

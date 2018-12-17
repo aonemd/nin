@@ -26,6 +26,8 @@ module Nin
         @todo.archive(*@args)
       when 'd'
         @todo.delete(*@args)
+      when 'gc'
+        @todo.delete_archived
       when 'o'
         system("`echo $EDITOR` #{@todo.store.file}")
       else
@@ -38,6 +40,7 @@ module Nin
         puts "\tc  id(s)       Un/complete todo(s)"
         puts "\tac id(s)       Un/archive todo(s)"
         puts "\td  id(s)       Delete todo(s)"
+        puts "\tgc             Delete all archived todos. Resets item ids"
         puts "\to              Open todo file in $EDITOR"
       end
     end

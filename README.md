@@ -25,6 +25,7 @@ COMMANDS:
         c  id(s)       Un/complete todo(s)
         ac id(s)       Un/archive todo(s)
         d  id(s)       Delete todo(s)
+        gc             Delete all archived todos
         o              Open todo file in $EDITOR
 ```
 

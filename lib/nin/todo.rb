@@ -48,6 +48,11 @@ module Nin
       end
     end
 
+    def delete_archived
+      delete(*archived_items.map(&:id))
+      reset_item_indices!
+    end
+
     def delete(*ids)
       ids.each do |id|
         item = find_by_id(id.to_i)
@@ -103,8 +108,20 @@ module Nin
       found_item
     end
 
+    def archived_items
+      @items.select { |item| item.archived }
+    end
+
     def unarchived_items
       @items.select { |item| !item.archived }
+    end
+
+    def reset_item_indices!
+      @items.each.with_index(1) do |item, index|
+        item.id = index
+      end
+
+      @store.write(to_hash)
     end
   end
 end
