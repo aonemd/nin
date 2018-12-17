@@ -112,11 +112,11 @@ module Nin
     end
 
     def archived_items
-      @items.select { |item| item.archived }
+      @items.select { |item| item.archived? }
     end
 
     def unarchived_items
-      @items.select { |item| !item.archived }
+      @items.select { |item| !item.archived? }
     end
 
     def reset_item_indices!

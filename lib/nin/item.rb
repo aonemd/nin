@@ -44,5 +44,17 @@ module Nin
         'archived'  => archived
       }
     end
+
+    def completed?
+      @completed
+    end
+
+    def archived?
+      @archived
+    end
+
+    def due?
+      @date < Date.today.to_s
+    end
   end
 end

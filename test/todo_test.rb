@@ -61,7 +61,7 @@ module Nin
     end
 
     def test_list_archived_only_by_default
-      expected = @todo.items.select { |item| !item.archived }.map do |item|
+      expected = @todo.items.select { |item| !item.archived? }.map do |item|
         item.to_s << "\n"
       end.join
 
@@ -117,7 +117,7 @@ module Nin
     def test_complete
       @todo.complete(2)
 
-      assert @todo.items[1].completed
+      assert @todo.items[1].completed?
     end
 
     def test_complete_not_found
@@ -129,8 +129,8 @@ module Nin
     def test_complete_multiple_items
       @todo.complete(2, 4)
 
-      assert @todo.items[1].completed
-      assert @todo.items[3].completed
+      assert @todo.items[1].completed?
+      assert @todo.items[3].completed?
     end
 
     def test_archive
@@ -139,7 +139,7 @@ module Nin
       @todo.archive(id)
 
 
-      assert @todo.items[1].archived
+      assert @todo.items[1].archived?
     end
 
     def test_archive_not_found
@@ -151,8 +151,8 @@ module Nin
     def test_archive_multiple_items
       @todo.archive(1, 2)
 
-      assert @todo.items[1].archived
-      assert @todo.items[2].archived
+      assert @todo.items[1].archived?
+      assert @todo.items[2].archived?
     end
 
     def test_delete_archived

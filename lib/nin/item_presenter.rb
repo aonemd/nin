@@ -8,9 +8,9 @@ module Nin
     private
 
     def desc
-      if self.archived
+      if self.archived?
         self.desc.yellow
-      elsif self.completed
+      elsif self.completed?
         self.desc.white
       else
         self.desc
@@ -18,7 +18,7 @@ module Nin
     end
 
     def completed
-      if self.completed
+      if self.completed?
         '[x]'.green
       else
         '[ ]'
@@ -34,7 +34,7 @@ module Nin
       when Date.today.prev_day.to_s
         '@yesterday'.magenta
       else
-        if self.date < Date.today.to_s
+        if self.due?
           ('@' << self.date).magenta
         else
           '@' << self.date
