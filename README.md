@@ -5,10 +5,25 @@ A simple, full-featured command line todo app
 
 ![nin demo GIF](/demo.gif)
 
+## Features
+
+- Simple, easy-to-use CLI
+- Currently supports: listing, adding, editing, deleting, completing,
+  archiving, and deleting archived todo items
+- Smart colored output
+- Modular code covered by unit tests
+- Uses YAML for storage by default
+
 ## Installation
 
 ```bash
 gem install nin
+```
+
+To run the tests:
+
+```console
+rake
 ```
 
 ## Usage
