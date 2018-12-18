@@ -61,7 +61,7 @@ module Nin
         @items.delete(item)
       end
 
-      @store.write(to_hash)
+      reset_item_indices!
     end
 
     private
