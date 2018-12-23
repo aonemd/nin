@@ -30,6 +30,8 @@ module Nin
         @todo.delete_archived
       when 'o'
         system("`echo $EDITOR` #{@todo.store.file}")
+      when 'i'
+        run_interactive_mode
       else
         puts "NAME:\n\tnin - a simple, full-featured command line todo app"
         puts "\nUSAGE:\n\tnin COMMAND [arguments...]"
@@ -60,6 +62,14 @@ module Nin
     def validate_args
       COMMANDS_WITH_ARGS.each do |command|
         raise EmptyCommandArgumentError if @command == command && @args.empty?
+      end
+    end
+
+    def run_interactive_mode
+      while line = Readline.readline("nin> ", true)
+        line = line.split(' ')
+
+        Command.new(line[0], line[1..-1]).call
       end
     end
   end
