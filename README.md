@@ -11,8 +11,8 @@ A simple, full-featured command line todo app
 - Currently supports: listing, adding, editing, deleting, completing,
   archiving, and deleting archived todo items
 - Smart colored output
+- Uses YAML for storage by default (There's an option to use TOML but no configuration for it, yet)
 - Modular code covered by unit tests
-- Uses YAML for storage by default
 
 ## Installation
 
