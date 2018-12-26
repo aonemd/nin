@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nin (0.6.0)
+    nin (0.7.0)
       chronic
       colored2
       toml-rb
@@ -26,4 +26,4 @@ DEPENDENCIES
   nin!
 
 BUNDLED WITH
-   1.17.1
+   1.17.2
