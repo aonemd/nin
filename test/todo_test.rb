@@ -4,35 +4,42 @@ module Nin
   class FakeStore
     def read
       {
-        Date.today.to_s => [
+        Date.today.prev_day.to_s => [
           {
             'id' => 1,
             'desc' => 'Fake Task 1 desc',
+            'tags' => ['fake_tag'],
+            'completed' => false,
+            'archived' => false
+          }
+        ],
+        Date.today.to_s => [
+          {
+            'id' => 2,
+            'desc' => 'Fake Task 2 desc',
             'tags' => ['school'],
             'completed' => true,
             'archived' => false
           },
           {
-            'id' => 2,
-            'desc' => 'Fake Task 2 desc',
+            'id' => 3,
+            'desc' => 'Fake Task 3 desc',
             'tags' => [],
             'completed' => false,
             'archived' => false
-          }
-        ],
-        Date.today.prev_day.to_s => [
+          },
           {
             'id' => 4,
             'desc' => 'Fake Task 4 desc',
-            'tags' => ['fake_tag'],
+            'tags' => [],
             'completed' => false,
             'archived' => false
           }
         ],
         Date.today.succ.to_s => [
           {
-            'id' => 3,
-            'desc' => 'Fake Task 3 desc',
+            'id' => 5,
+            'desc' => 'Fake Task 5 desc',
             'tags' => ['fake_tag'],
             'completed' => true,
             'archived' => true
@@ -104,7 +111,7 @@ module Nin
     def test_edit
       return_msg = @todo.edit(3, 'Fake Task 3 desc editd', nil, [])
 
-      assert_equal 'Fake Task 3 desc editd', @todo.items.last.desc
+      assert_equal 'Fake Task 3 desc editd', @todo.items.find_by(:id, 3).desc
       assert_equal 'Wrote to store successfully', return_msg
     end
 
@@ -115,9 +122,9 @@ module Nin
     end
 
     def test_complete
-      @todo.complete(2)
+      @todo.complete(3)
 
-      assert @todo.items[1].completed?
+      assert @todo.items.find_by(:id, 3).completed?
     end
 
     def test_complete_not_found
@@ -127,9 +134,9 @@ module Nin
     end
 
     def test_complete_multiple_items
-      @todo.complete(2, 4)
+      @todo.complete(1, 4)
 
-      assert @todo.items.find_by(:id, 2).completed?
+      assert @todo.items.find_by(:id, 1).completed?
       assert @todo.items.find_by(:id, 4).completed?
     end
 
