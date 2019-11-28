@@ -6,6 +6,7 @@ require 'date'
 require 'readline'
 
 require_relative 'nin/version'
+require_relative 'nin/extensions/array_extensions'
 require_relative 'nin/error'
 require_relative 'nin/yaml_store'
 require_relative 'nin/toml_store'
