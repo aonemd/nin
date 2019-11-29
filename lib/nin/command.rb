@@ -41,6 +41,7 @@ module Nin
         puts "\tl  [a]         List all unarchived todos. Pass optional argument `a` to list all todos"
         puts "\ta  desc        Add a todo. Prepend due date by a @. Prepend each tag by a \\#"
         puts "\te  id desc     Edit a todo. Prepend due date by a @. Prepend each tag by a \\#"
+        puts "\tp  id step     Prioritize a todo by either a positive or negative step within its date group"
         puts "\tc  id(s)       Un/complete todo(s)"
         puts "\tac id(s)       Un/archive todo(s)"
         puts "\td  id(s)       Delete todo(s)"

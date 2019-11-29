@@ -39,6 +39,7 @@ COMMANDS:
         l  [a]         List all unarchived todos. Pass optional argument `a` to list all todos
         a  desc        Add a todo. Prepend due date by an @. Prepend tag by a \#
         e  id desc     Edit a todo. Prepend due date by an @. Prepend tag by a \#
+        p  id step     Prioritize a todo by either a positive or negative step within its date group
         c  id(s)       Un/complete todo(s)
         ac id(s)       Un/archive todo(s)
         d  id(s)       Delete todo(s)
