@@ -1,5 +1,5 @@
 module Nin
-  class ItemPresenter < SimpleDelegator
+  class ItemPresenter < ::SimpleDelegator
     def call
       sprintf("%d\t%s\t%s   \t%s %s",
               id, completed, date, desc, tags).gsub('  ', ' ')
