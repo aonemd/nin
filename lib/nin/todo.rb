@@ -6,7 +6,7 @@ module Nin
     def initialize(store = YamlStore.new, options = {})
       @store   = store
       @options = options
-      @items   = load_items.sort_by(&:date)
+      @items   = load_items_sorted
     end
 
     def list
@@ -65,6 +65,10 @@ module Nin
     end
 
     private
+
+    def load_items_sorted
+      load_items.sort_by { |item| [item.date, item.id] }
+    end
 
     def load_items
       items = []

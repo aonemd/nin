@@ -63,6 +63,10 @@ module Nin
       refute_empty @todo.items
     end
 
+    def test_initialize_loads_items_sorted
+      assert @todo.items.sorted_by? { |item| [item.date, item.id] }
+    end
+
     def test_initialize_orders_items_by_date
       assert ascending?(@todo.items, :date)
     end

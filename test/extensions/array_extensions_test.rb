@@ -18,6 +18,14 @@ module Nin
       @fake_array = [FakeObject.new(1), FakeObject.new(6), FakeObject.new(2)]
     end
 
+    def test_sorted_by?
+      assert [1, 2, 3, 4, 5].sorted_by? { |e| e }
+      assert ['a', 'b', 'c'].sorted_by? { |e| e }
+      assert ['bb', 'ccc', 'aaaa'].sorted_by? { |e| e.length }
+
+      refute [2, 1, 3, 4, 5].sorted_by? { |e| e }
+    end
+
     def test_find_by
       returned = @fake_array.find_by(:id, 1)
 

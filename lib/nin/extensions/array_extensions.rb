@@ -1,4 +1,8 @@
 class Array
+  def sorted_by?
+    each_cons(2).all? { |a, b| ((yield a) <=> (yield b)) <= 0 }
+  end
+
   def find_by(key, val)
     self.where(key, val).first
   end
