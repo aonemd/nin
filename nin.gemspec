@@ -22,6 +22,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'chronic'
   gem.add_dependency 'colored2'
 
-  gem.add_development_dependency 'rake'
   gem.add_development_dependency 'minitest'
 end
