@@ -46,6 +46,7 @@ module Nin
         puts "\tac id(s)       Un/archive todo(s)"
         puts "\td  id(s)       Delete todo(s)"
         puts "\tgc             Delete all archived todos. Resets item ids as a side effect"
+        puts "\ti              Open nin in REPL mode"
         puts "\to              Open todo file in $EDITOR"
       end
     end

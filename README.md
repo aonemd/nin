@@ -44,6 +44,7 @@ COMMANDS:
         ac id(s)       Un/archive todo(s)
         d  id(s)       Delete todo(s)
         gc             Delete all archived todos. Resets item ids as a side effect
+        i              Open nin in REPL mode
         o              Open todo file in $EDITOR
 ```
 
