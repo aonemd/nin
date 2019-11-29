@@ -8,6 +8,8 @@
   ![nin demo GIF](/demo.gif)
 </div>
 
+[![Build Status](https://travis-ci.com/aonemd/nin.svg?branch=master)](https://travis-ci.com/aonemd/nin)
+
 ## Features
 
 - Simple, easy-to-use CLI
