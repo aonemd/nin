@@ -1,9 +1,12 @@
-nin
----
+<div align="center">
+  <h1>
+    nin
+  </h1>
 
-A simple, full-featured command line todo app
+  A simple, full-featured command line todo app
 
-![nin demo GIF](/demo.gif)
+  ![nin demo GIF](/demo.gif)
+</div>
 
 ## Features
 
