@@ -15,12 +15,6 @@ module Nin
       assert_equal Date.today.to_s, @item_today.date
     end
 
-    def test_update_date_if_nil
-      @item_today.date = nil
-
-      assert_equal Date.today.to_s, @item_today.date
-    end
-
     def test_toggle_completed
       @item_today.toggle_completed!
 

@@ -4,7 +4,7 @@ module Nin
 
     def initialize(id,
                    desc,
-                   date = nil,
+                   date = Date.today.to_s,
                    tags = [],
                    completed = false,
                    archived = false,
@@ -12,15 +12,11 @@ module Nin
 
       @id        = id
       @desc      = desc
-      self.date  = date # this looks ugly
+      @date      = date || Date.today.to_s
       @tags      = tags
       @completed = completed
       @archived  = archived
       @formatter = formatter.new(self)
-    end
-
-    def date=(date = nil)
-      @date = date || Date.today.to_s
     end
 
     def toggle_completed!
