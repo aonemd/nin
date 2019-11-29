@@ -3,6 +3,7 @@ require 'toml-rb'
 require 'chronic'
 require 'colored2'
 require 'date'
+require 'delegate'
 require 'readline'
 
 require_relative 'nin/version'
