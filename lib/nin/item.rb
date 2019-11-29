@@ -19,6 +19,12 @@ module Nin
       @formatter = formatter.new(self)
     end
 
+    def edit(desc, date = nil, tags = [])
+      self.desc = desc
+      self.date = date unless date.nil?
+      self.tags.concat(tags)
+    end
+
     def toggle_completed!
       @completed = !@completed
     end

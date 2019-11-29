@@ -25,10 +25,10 @@ module Nin
     end
 
     def edit(id, desc, date, tags)
-      item      = find_by_id(id)
-      item.desc = desc
-      item.date = date
-      item.tags = tags
+      item = find_by_id(id)
+
+      item.edit(desc, date, tags)
+
       @store.write(to_hash)
     end
 

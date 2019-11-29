@@ -113,9 +113,14 @@ module Nin
     end
 
     def test_edit
-      return_msg = @todo.edit(3, 'Fake Task 3 desc editd', nil, [])
+      item = @todo.items.find_by(:id, 3)
+      before_date = item.date
 
-      assert_equal 'Fake Task 3 desc editd', @todo.items.find_by(:id, 3).desc
+      return_msg = @todo.edit(3, 'Fake Task 3 desc editd', nil, ['new_tag'])
+
+      assert_equal 'Fake Task 3 desc editd', item.desc
+      assert_equal before_date, item.date
+      assert_equal ['new_tag'], item.tags
       assert_equal 'Wrote to store successfully', return_msg
     end
 

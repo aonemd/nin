@@ -15,6 +15,32 @@ module Nin
       assert_equal Date.today.to_s, @item_today.date
     end
 
+    def test_edit_desc_only
+      @item_today.edit('new desc')
+
+      assert_equal 'new desc', @item_today.desc
+    end
+
+    def test_edit_date
+      @item_tomorrow.edit('Item 2', Date.today.succ.succ.to_s)
+
+      assert_equal Date.today.succ.succ.to_s, @item_tomorrow.date
+    end
+
+    def test_edit_with_nil_date
+      before_date = @item_tomorrow.date
+
+      @item_tomorrow.edit('Item 2', nil)
+
+      assert_equal Date.today.succ.to_s, before_date
+    end
+
+    def test_edit_appends_tags
+      @item_with_tags.edit('Item 5', nil, ['semester_1'])
+
+      assert_equal ['school', 'semester_1'], @item_with_tags.tags
+    end
+
     def test_toggle_completed
       @item_today.toggle_completed!
 
