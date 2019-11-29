@@ -32,6 +32,23 @@ module Nin
       @store.write(to_hash)
     end
 
+    def prioritize(id, step = 1)
+      item_to_prioritize = find_by_id(id)
+      item_group         = @items.group_by(&:date)[item_to_prioritize.date]
+
+      new_id, actual_step = item_group.map(&:id).round_shift(id, step)
+      step_sign           = actual_step > 0 ? +1 : -1
+
+      items_to_reprioritize = item_group.where(:id) do |item_id|
+        step_sign * item_id < step_sign * id
+      end.limit(actual_step)
+
+      item_to_prioritize.id = new_id
+      items_to_reprioritize.each { |item| item.id += step_sign }
+
+      @store.write(to_hash)
+    end
+
     def complete(*ids)
       ids.each do |id|
         item = find_by_id(id.to_i)

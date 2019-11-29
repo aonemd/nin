@@ -125,6 +125,159 @@ module Nin
       end
     end
 
+    def test_prioritize_by_1_up
+      item_to_prioritize   = @todo.items.find_by(:id, 3).dup
+      item_to_deprioritize = @todo.items.find_by(:id, 2).dup
+
+      @todo.prioritize(3)
+
+      item_prioritized   = @todo.items.find_by(:id, 2)
+      item_deprioritized = @todo.items.find_by(:id, 3)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_deprioritize.desc, item_deprioritized.desc
+    end
+
+    def test_prioritize_by_1_down
+      item_to_prioritize   = @todo.items.find_by(:id, 2).dup
+      item_to_deprioritize = @todo.items.find_by(:id, 3).dup
+
+      @todo.prioritize(2, -1)
+
+      item_prioritized   = @todo.items.find_by(:id, 3)
+      item_deprioritized = @todo.items.find_by(:id, 2)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_deprioritize.desc, item_deprioritized.desc
+    end
+
+    def test_prioritize_by_n_steps_up
+      item_to_prioritize     = @todo.items.find_by(:id, 4).dup
+      item_to_deprioritize_1 = @todo.items.find_by(:id, 2).dup
+      item_to_deprioritize_2 = @todo.items.find_by(:id, 3).dup
+
+      @todo.prioritize(4, 2)
+
+      item_prioritized     = @todo.items.find_by(:id, 2)
+      item_deprioritized_1 = @todo.items.find_by(:id, 3)
+      item_deprioritized_2 = @todo.items.find_by(:id, 4)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_deprioritize_1.desc, item_deprioritized_1.desc
+      assert_equal item_to_deprioritize_2.desc, item_deprioritized_2.desc
+    end
+
+    def test_prioritize_by_n_steps_down
+      item_to_prioritize     = @todo.items.find_by(:id, 2).dup
+      item_to_deprioritize_1 = @todo.items.find_by(:id, 3).dup
+      item_to_deprioritize_2 = @todo.items.find_by(:id, 4).dup
+
+      @todo.prioritize(2, -2)
+
+      item_prioritized     = @todo.items.find_by(:id, 4)
+      item_deprioritized_1 = @todo.items.find_by(:id, 2)
+      item_deprioritized_2 = @todo.items.find_by(:id, 3)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_deprioritize_1.desc, item_deprioritized_1.desc
+      assert_equal item_to_deprioritize_2.desc, item_deprioritized_2.desc
+    end
+
+    def test_prioritize_single_item_group
+      item_to_prioritize = @todo.items.find_by(:id, 1).dup
+
+      @todo.prioritize(1, 1)
+
+      item_prioritized = @todo.items.find_by(:id, 1)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+    end
+
+    def test_prioritize_small_positive_range
+      item_to_prioritize   = @todo.items.find_by(:id, 4).dup
+      item_to_deprioritize = @todo.items.find_by(:id, 3).dup
+
+      @todo.prioritize(4, 1)
+
+      item_prioritized   = @todo.items.find_by(:id, 3)
+      item_deprioritized = @todo.items.find_by(:id, 4)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_deprioritize.desc, item_deprioritized.desc
+    end
+
+    def test_prioritize_small_negative_range
+      item_to_prioritize   = @todo.items.find_by(:id, 3).dup
+      item_to_deprioritize = @todo.items.find_by(:id, 4).dup
+
+      @todo.prioritize(3, -1)
+
+      item_prioritized   = @todo.items.find_by(:id, 4)
+      item_deprioritized = @todo.items.find_by(:id, 3)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_deprioritize.desc, item_deprioritized.desc
+    end
+
+    def test_prioritize_zero_range
+      item_to_prioritize   = @todo.items.find_by(:id, 3).dup
+      item_to_deprioritize = @todo.items.find_by(:id, 4).dup
+
+      @todo.prioritize(3, 0)
+
+      item_prioritized   = @todo.items.find_by(:id, 3)
+      item_deprioritized = @todo.items.find_by(:id, 4)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_deprioritize.desc, item_deprioritized.desc
+    end
+
+    def test_prioritize_large_positive_range
+      item_to_prioritize   = @todo.items.find_by(:id, 3).dup
+      item_to_deprioritize = @todo.items.find_by(:id, 2).dup
+
+      @todo.prioritize(3, 100)
+
+      item_prioritized   = @todo.items.find_by(:id, 2)
+      item_deprioritized = @todo.items.find_by(:id, 3)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_deprioritize.desc, item_deprioritized.desc
+    end
+
+    def test_prioritize_large_positive_range_no_change
+      item_to_prioritize = @todo.items.find_by(:id, 2).dup
+
+      @todo.prioritize(2, 100)
+
+      item_prioritized = @todo.items.find_by(:id, 2)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+    end
+
+    def test_prioritize_large_negative_range
+      item_to_prioritize   = @todo.items.find_by(:id, 3).dup
+      item_to_reprioritize = @todo.items.find_by(:id, 4).dup
+
+      @todo.prioritize(3, -200)
+
+      item_prioritized   = @todo.items.find_by(:id, 4)
+      item_reprioritized = @todo.items.find_by(:id, 3)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_reprioritize.desc, item_reprioritized.desc
+    end
+
+    def test_prioritize_large_negative_range_no_change
+      item_to_prioritize = @todo.items.find_by(:id, 4).dup
+
+      @todo.prioritize(4, -200)
+
+      item_prioritized = @todo.items.find_by(:id, 4)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+    end
+
     def test_complete
       @todo.complete(3)
 

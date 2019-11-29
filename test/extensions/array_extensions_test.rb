@@ -26,6 +26,32 @@ module Nin
       refute [2, 1, 3, 4, 5].sorted_by? { |e| e }
     end
 
+    def test_limit
+      assert_equal [3, 4], [1, 2, 3, 4].limit(2)
+      assert_equal [1, 2], [1, 2, 3, 4].limit(-2)
+    end
+
+    def test_round_shift
+      assert_equal [1, 1], [1, 2, 3].round_shift(2, 1)
+      assert_equal [1, 0], [1, 2, 3].round_shift(1, 1)
+      assert_equal [1, 2], [1, 2, 3].round_shift(3, 2)
+      assert_equal [1, 0], [1, 2, 3].round_shift(1, 100)
+      assert_equal [1, 2], [1, 2, 3].round_shift(3, 100)
+
+      assert_equal [3, -1], [1, 2, 3].round_shift(2, -1)
+      assert_equal [3, 0], [1, 2, 3].round_shift(3, -1)
+      assert_equal [3, -2], [1, 2, 3].round_shift(1, -2)
+      assert_equal [3, 0], [1, 2, 3].round_shift(3, -100)
+      assert_equal [3, -2], [1, 2, 3].round_shift(1, -100)
+    end
+
+    def test_median
+      assert_equal 2, [1, 2, 3, 4].median
+      assert_equal 5, [1, 5, 7].median
+      assert_equal 1, [1].median
+      assert_nil [].median
+    end
+
     def test_find_by
       returned = @fake_array.find_by(:id, 1)
 

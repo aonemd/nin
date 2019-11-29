@@ -20,6 +20,8 @@ module Nin
       when 'e'
         desc, date, tags = Parser.new(@args[1..-1].join(' ')).call
         @todo.edit(@args[0].to_i, desc, date, tags)
+      when 'p'
+        @todo.prioritize(@args[0].to_i, @args[1].to_i)
       when 'c'
         @todo.complete(*@args)
       when 'ac'
