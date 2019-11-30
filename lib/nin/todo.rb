@@ -115,7 +115,7 @@ module Nin
     end
 
     def to_hash
-      @items.group_by(&:date).reduce({}) do |hash, (key, values)|
+      groupped_items.reduce({}) do |hash, (key, values)|
         hash[key] = values.map(&:to_h)
         hash
       end
@@ -139,6 +139,10 @@ module Nin
       raise ItemNotFoundError unless found_item
 
       found_item
+    end
+
+    def groupped_items
+      @items.group_by { |item| item.date.to_s }
     end
 
     def archived_items

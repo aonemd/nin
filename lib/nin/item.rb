@@ -4,7 +4,7 @@ module Nin
 
     def initialize(id,
                    desc,
-                   date = Date.today.to_s,
+                   date = Date.today,
                    tags = [],
                    completed = false,
                    archived = false,
@@ -12,7 +12,7 @@ module Nin
 
       @id        = id
       @desc      = desc
-      @date      = date || Date.today.to_s
+      @date      = Date.parse_or_return(date) || Date.today
       @tags      = tags
       @completed = completed
       @archived  = archived
@@ -56,24 +56,11 @@ module Nin
     end
 
     def past?
-      @date < Date.today.to_s
+      @date < Date.today
     end
 
     def today?
-      @date == Date.today.to_s
-    end
-
-    def date_to_humanize
-      case @date
-      when Date.today.to_s
-        '@today'
-      when Date.today.prev_day.to_s
-        '@yesterday'
-      when Date.today.succ.to_s
-        '@tomorrow'
-      else
-        '@' << @date
-      end
+      @date == Date.today
     end
   end
 end
