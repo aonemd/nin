@@ -55,8 +55,25 @@ module Nin
       @archived
     end
 
-    def due?
+    def past?
       @date < Date.today.to_s
+    end
+
+    def today?
+      @date == Date.today.to_s
+    end
+
+    def date_to_humanize
+      case @date
+      when Date.today.to_s
+        '@today'
+      when Date.today.prev_day.to_s
+        '@yesterday'
+      when Date.today.succ.to_s
+        '@tomorrow'
+      else
+        '@' << @date
+      end
     end
   end
 end

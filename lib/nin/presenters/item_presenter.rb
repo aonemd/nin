@@ -27,20 +27,15 @@ module Nin
       end
 
       def date
-        case self.date
-        when Date.today.to_s
-          '@today'.bold
-        when Date.today.succ.to_s
-          '@tomorrow'
-        when Date.today.prev_day.to_s
-          '@yesterday'.magenta
+        date_in_words = self.date_to_humanize
+
+        if self.past?
+          date_in_words.magenta
+        elsif self.today?
+          date_in_words.bold.cyan
         else
-          if self.due?
-            ('@' << self.date).magenta
-          else
-            '@' << self.date
-          end
-        end.cyan
+          date_in_words.cyan
+        end
       end
 
       def tags
