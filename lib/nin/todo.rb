@@ -115,9 +115,8 @@ module Nin
     end
 
     def to_hash
-      groupped_items.reduce({}) do |hash, (key, values)|
-        hash[key] = values.map(&:to_h)
-        hash
+      groupped_items.reduce({}) do |hash, (date, items)|
+        hash.update(date => items.map(&:to_h))
       end
     end
 
