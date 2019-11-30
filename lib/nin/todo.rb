@@ -81,6 +81,15 @@ module Nin
       reset_item_indices!
     end
 
+    def analyze
+      items_to_analyze = @items.where(:completed, true)
+
+      histogram = items_to_analyze.group_by(&:date).map { |k, v| [k, v.size] }
+      histogram.each do |date, size|
+        puts "#{date} : #{'*' * size}"
+      end
+    end
+
     private
 
     def load_items_sorted

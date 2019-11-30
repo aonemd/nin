@@ -30,6 +30,8 @@ module Nin
         @todo.delete(*@args)
       when 'gc'
         @todo.delete_archived
+      when 's'
+        @todo.analyze
       when 'o'
         system("`echo $EDITOR` #{@todo.store.file}")
       when 'i'
@@ -46,6 +48,7 @@ module Nin
         puts "\tac id(s)       Un/archive todo(s)"
         puts "\td  id(s)       Delete todo(s)"
         puts "\tgc             Delete all archived todos. Resets item ids as a side effect"
+        puts "\ts              Print statistics"
         puts "\ti              Open nin in REPL mode"
         puts "\to              Open todo file in $EDITOR"
       end
