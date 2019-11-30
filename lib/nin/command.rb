@@ -12,45 +12,45 @@ module Nin
 
     def call
       case @command
-      when 'l'
+      when 'l', 'list'
         @todo.list
-      when 'a'
+      when 'a', 'add'
         desc, date, tags = Parser.new(@args.join(' ')).call
         @todo.add(desc, date, tags)
-      when 'e'
+      when 'e', 'edit'
         desc, date, tags = Parser.new(@args[1..-1].join(' ')).call
         @todo.edit(@args[0].to_i, desc, date, tags)
-      when 'p'
+      when 'p', 'prioritize'
         @todo.prioritize(@args[0].to_i, @args[1].to_i)
-      when 'c'
+      when 'c', 'complete'
         @todo.complete(*@args)
-      when 'ac'
+      when 'ac', 'archive'
         @todo.archive(*@args)
-      when 'd'
+      when 'd', 'delete'
         @todo.delete(*@args)
-      when 'gc'
+      when 'gc', 'garbage'
         @todo.delete_archived
-      when 's'
+      when 's', 'analyze'
         @todo.analyze
-      when 'o'
-        system("`echo $EDITOR` #{@todo.store.file}")
-      when 'i'
+      when 'i', 'repl'
         run_interactive_mode
+      when 'o', 'open'
+        system("`echo $EDITOR` #{@todo.store.file}")
       else
         puts "NAME:\n\tnin - a simple, full-featured command line todo app"
         puts "\nUSAGE:\n\tnin COMMAND [arguments...]"
         puts "\nCOMMANDS:"
-        puts "\tl  [a]         List all unarchived todos. Pass optional argument `a` to list all todos"
-        puts "\ta  desc        Add a todo. Prepend due date by a @. Prepend each tag by a \\#"
-        puts "\te  id desc     Edit a todo. Prepend due date by a @. Prepend each tag by a \\#"
-        puts "\tp  id step     Prioritize a todo by either a positive or negative step within its date group"
-        puts "\tc  id(s)       Un/complete todo(s)"
-        puts "\tac id(s)       Un/archive todo(s)"
-        puts "\td  id(s)       Delete todo(s)"
-        puts "\tgc             Delete all archived todos. Resets item ids as a side effect"
-        puts "\ts              Print statistics"
-        puts "\ti              Open nin in REPL mode"
-        puts "\to              Open todo file in $EDITOR"
+        puts "\tl  | list          [a]        List all unarchived todos. Pass optional argument `a` to list all todos"
+        puts "\ta  | add           desc       Add a todo. Prepend due date by a @. Prepend each tag by a \\#"
+        puts "\te  | edit          id desc    Edit a todo. Prepend due date by a @. Prepend each tag by a \\#"
+        puts "\tp  | prioritize    id step    Prioritize a todo by either a positive or negative step within its date group"
+        puts "\tc  | complete      id(s)      Un/complete todo(s)"
+        puts "\tac | archive       id(s)      Un/archive todo(s)"
+        puts "\td  | delete        id(s)      Delete todo(s)"
+        puts "\tgc | garbage                  Delete all archived todos. Resets item ids as a side effect"
+        puts "\ts  | analyze                  Analyze tasks and print statistics"
+        puts "\ti  | repl                     Open nin in REPL mode"
+        puts "\to  | open                     Open todo file in $EDITOR"
       end
     end
 

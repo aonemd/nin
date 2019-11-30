@@ -41,17 +41,17 @@ USAGE:
         nin COMMAND [arguments...]
 
 COMMANDS:
-        l  [a]         List all unarchived todos. Pass optional argument `a` to list all todos
-        a  desc        Add a todo. Prepend due date by an @. Prepend tag by a \#
-        e  id desc     Edit a todo. Prepend due date by an @. Prepend tag by a \#
-        p  id step     Prioritize a todo by either a positive or negative step within its date group
-        c  id(s)       Un/complete todo(s)
-        ac id(s)       Un/archive todo(s)
-        d  id(s)       Delete todo(s)
-        gc             Delete all archived todos. Resets item ids as a side effect
-        s              Print statistics
-        i              Open nin in REPL mode
-        o              Open todo file in $EDITOR
+        l  | list          [a]        List all unarchived todos. Pass optional argument `a` to list all todos
+        a  | add           desc       Add a todo. Prepend due date by a @. Prepend each tag by a \#
+        e  | edit          id desc    Edit a todo. Prepend due date by a @. Prepend each tag by a \#
+        p  | prioritize    id step    Prioritize a todo by either a positive or negative step within its date group
+        c  | complete      id(s)      Un/complete todo(s)
+        ac | archive       id(s)      Un/archive todo(s)
+        d  | delete        id(s)      Delete todo(s)
+        gc | garbage                  Delete all archived todos. Resets item ids as a side effect
+        s  | analyze                  Analyze tasks and print statistics
+        i  | repl                     Open nin in REPL mode
+        o  | open                     Open todo file in $EDITOR
 ```
 
 ## Why
