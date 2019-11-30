@@ -33,20 +33,6 @@ module Nin
       @archived = !@archived
     end
 
-    def to_s
-      @formatter.call
-    end
-
-    def to_h
-      {
-        'id' => id,
-        'desc' => desc,
-        'tags' => tags,
-        'completed' => completed,
-        'archived'  => archived
-      }
-    end
-
     def completed?
       @completed
     end
@@ -61,6 +47,20 @@ module Nin
 
     def today?
       @date == Date.today
+    end
+
+    def to_s
+      @formatter.call
+    end
+
+    def to_h
+      {
+        'id' => id,
+        'desc' => desc,
+        'tags' => tags,
+        'completed' => completed,
+        'archived' => archived
+      }
     end
   end
 end
