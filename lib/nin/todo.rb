@@ -10,13 +10,13 @@ module Nin
     end
 
     def list
-      if @options[:archived]
-        @items
-      else
-        unarchived_items
-      end.each do |item|
-        puts item
-      end
+      items_to_list = if @options[:archived]
+                        @items
+                      else
+                        unarchived_items
+                      end
+
+      puts Presenter::TodoPresenter.new(items_to_list).call
     end
 
     def add(desc, date, tags)

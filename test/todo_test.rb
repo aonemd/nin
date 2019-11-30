@@ -72,9 +72,7 @@ module Nin
     end
 
     def test_list_archived_only_by_default
-      expected = @todo.items.select { |item| !item.archived? }.map do |item|
-        item.to_s << "\n"
-      end.join
+      expected = Presenter::TodoPresenter.new(@todo.items.select { |item| !item.archived? }).call.join("\n") + "\n"
 
       assert_output(expected) { @todo.list }
     end
@@ -82,9 +80,7 @@ module Nin
     def test_list_all_with_archived
       @todo.instance_variable_set(:@options, { archived: true })
 
-      expected = @todo.items.map do |item|
-        item.to_s << "\n"
-      end.join
+      expected = Presenter::TodoPresenter.new(@todo.items).call.join("\n") + "\n"
 
       assert_output(expected) { @todo.list }
     end
