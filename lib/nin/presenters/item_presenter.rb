@@ -7,7 +7,7 @@ module Nin
         separating_spaces = options.fetch(:separating_spaces, 2)
         id_spaces         = options.fetch(:longest_id, 1) + separating_spaces
         completed_spaces  = _completed.length + separating_spaces
-        date_spaces       = _date.length + (options.fetch(:longest_date, 11) - self.date.humanize.length) + separating_spaces
+        date_spaces       = _date.length + (options.fetch(:longest_date, 11) - _date.remove_color.length) + separating_spaces
 
         sprintf("%-#{id_spaces}d %-#{completed_spaces}s %-#{date_spaces}s %s %s",
                 _id, _completed, _date, _desc, _tags)

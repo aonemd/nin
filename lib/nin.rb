@@ -8,6 +8,7 @@ require 'readline'
 
 require_relative 'nin/version'
 require_relative 'nin/extensions/array_extensions'
+require_relative 'nin/extensions/string_extensions'
 require_relative 'nin/extensions/integer_extensions'
 require_relative 'nin/extensions/date_extensions'
 require_relative 'nin/error'
