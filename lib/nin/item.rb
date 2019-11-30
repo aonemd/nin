@@ -8,7 +8,7 @@ module Nin
                    tags = [],
                    completed = false,
                    archived = false,
-                   formatter = ItemPresenter)
+                   formatter = Presenter::ItemPresenter)
 
       @id        = id
       @desc      = desc
