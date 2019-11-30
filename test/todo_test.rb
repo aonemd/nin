@@ -72,7 +72,7 @@ module Nin
     end
 
     def test_list_archived_only_by_default
-      expected = Presenter::TodoPresenter.new(@todo.items.select { |item| !item.archived? }).call.join("\n") + "\n"
+      expected = Presenter::TodoPresenter.new(@todo.items.where(:archived?, false)).call.join("\n") + "\n"
 
       assert_output(expected) { @todo.list }
     end

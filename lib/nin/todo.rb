@@ -142,11 +142,11 @@ module Nin
     end
 
     def archived_items
-      @items.select { |item| item.archived? }
+      @items.where(:archived?, true)
     end
 
     def unarchived_items
-      @items.select { |item| !item.archived? }
+      @items.where(:archived?, false)
     end
 
     def reset_item_indices!
