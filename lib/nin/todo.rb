@@ -21,6 +21,7 @@ module Nin
 
     def add(desc, date, tags)
       @items << Item.new(next_id, desc, date, tags)
+
       @store.write(to_hash)
     end
 
@@ -69,6 +70,7 @@ module Nin
 
     def delete_archived
       delete(*archived_items.map(&:id))
+
       reset_item_indices!
     end
 
@@ -106,18 +108,37 @@ module Nin
                             date,
                             item.fetch('tags'),
                             item.fetch('completed'),
-                            item.fetch('archived')
-                           )
+                            item.fetch('archived'))
         end
       end
 
       items
     end
 
+    def archived_items
+      @items.where(:archived?, true)
+    end
+
+    def unarchived_items
+      @items.where(:archived?, false)
+    end
+
+    def find_by_id(id)
+      found_item = @items.find_by(:id, id)
+
+      raise ItemNotFoundError unless found_item
+
+      found_item
+    end
+
     def to_hash
       groupped_items.reduce({}) do |hash, (date, items)|
         hash.update(date => items.map(&:to_h))
       end
+    end
+
+    def groupped_items
+      @items.group_by { |item| item.date.to_s }
     end
 
     def next_id
@@ -130,26 +151,6 @@ module Nin
       rescue NoMethodError
         0
       end
-    end
-
-    def find_by_id(id)
-      found_item = @items.find_by(:id, id)
-
-      raise ItemNotFoundError unless found_item
-
-      found_item
-    end
-
-    def groupped_items
-      @items.group_by { |item| item.date.to_s }
-    end
-
-    def archived_items
-      @items.where(:archived?, true)
-    end
-
-    def unarchived_items
-      @items.where(:archived?, false)
     end
 
     def reset_item_indices!
