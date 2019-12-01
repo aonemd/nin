@@ -43,6 +43,13 @@ module Nin
             'tags' => ['fake_tag'],
             'completed' => true,
             'archived' => true
+          },
+          {
+            'id' => 6,
+            'desc' => 'Fake Task 6 desc',
+            'tags' => [],
+            'completed' => false,
+            'archived' => false
           }
         ]
       }
@@ -277,6 +284,19 @@ module Nin
       item_prioritized = @todo.items.find_by(:id, 4)
 
       assert_equal item_to_prioritize.desc, item_prioritized.desc
+    end
+
+    def test_prioritize_within_archived_items
+      item_to_prioritize   = @todo.items.find_by(:id, 6).dup
+      item_to_deprioritize = @todo.items.find_by(:id, 5).dup
+
+      @todo.prioritize(6, 1)
+
+      item_prioritized   = @todo.items.find_by(:id, 5)
+      item_deprioritized = @todo.items.find_by(:id, 6)
+
+      assert_equal item_to_prioritize.desc, item_prioritized.desc
+      assert_equal item_to_deprioritize.desc, item_deprioritized.desc
     end
 
     def test_complete
