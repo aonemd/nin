@@ -18,7 +18,6 @@ Gem::Specification.new do |gem|
   gem.version = Nin::VERSION
   gem.license = 'MIT'
 
-  gem.add_dependency 'toml-rb'
   gem.add_dependency 'chronic'
   gem.add_dependency 'colored2'
 
