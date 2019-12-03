@@ -17,7 +17,7 @@ module Nin
     end
 
     def test_extract_date
-      assert_equal Date.today.succ.to_s, @parsed_data[1]
+      assert_equal Date.today.succ, @parsed_data[1]
       assert_equal 'Do school homework', @parsed_data[0]
     end
 

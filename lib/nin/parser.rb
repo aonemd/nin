@@ -19,7 +19,7 @@ module Nin
       date.gsub!('@', '')
       strip_tags(date_pattern)
 
-      Chronic.parse(date).strftime('%Y-%m-%d')
+      Chronic.parse(date).to_date
     end
 
     def extract_tags
