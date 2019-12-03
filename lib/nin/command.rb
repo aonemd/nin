@@ -15,10 +15,10 @@ module Nin
       when 'l', 'list'
         @todo.list
       when 'a', 'add'
-        desc, date, tags = Parser.new(@args.join(' ')).call
+        desc, date, tags = parse_item_desc(@args.join(' '))
         @todo.add(desc, date, tags)
       when 'e', 'edit'
-        desc, date, tags = Parser.new(@args[1..-1].join(' ')).call
+        desc, date, tags = parse_item_desc(@args[1..-1].join(' '))
         @todo.edit(@args[0].to_i, desc, date, tags)
       when 'p', 'prioritize'
         @todo.prioritize(@args[0].to_i, @args[1].to_i)
@@ -64,6 +64,15 @@ module Nin
       end
 
       options
+    end
+
+    def parse_item_desc(desc)
+      begin
+        Parser.new(desc).call
+      rescue InvalidDateFormatError
+        puts "Invalid date format."
+        exit
+      end
     end
 
     def validate_args

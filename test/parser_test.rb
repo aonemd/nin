@@ -26,6 +26,14 @@ module Nin
       assert_equal 'Do school homework', @empty_parsed_data[0]
     end
 
+    def test_invalid_date_format
+      @invalid_date_parser = Parser.new('Do school homework @thrsda')
+
+      assert_raises InvalidDateFormatError do
+        @invalid_date_parser.call
+      end
+    end
+
     def test_extract_tags
       assert_equal ['school'], @parsed_data[2]
       assert_equal 'Do school homework', @parsed_data[0]
