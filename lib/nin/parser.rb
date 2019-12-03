@@ -11,7 +11,7 @@ module Nin
     private
 
     def extract_date
-      date_pattern = /@[A-Z0-9.,-]+/i
+      date_pattern = /@[A-Z0-9,-\/]+/i
       date         = @desc.scan(date_pattern).last
 
       return nil if date.nil?
