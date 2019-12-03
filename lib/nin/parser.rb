@@ -2,12 +2,10 @@ module Nin
   class Parser
     def initialize(desc)
       @desc = desc
-      @date = extract_date
-      @tags = extract_tags
     end
 
     def call
-      [@desc, @date, @tags]
+      [@desc, extract_date, extract_tags]
     end
 
     private
