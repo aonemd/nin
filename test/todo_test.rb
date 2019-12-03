@@ -92,6 +92,14 @@ module Nin
       assert_output(expected) { @todo.list }
     end
 
+    def test_list_empty_items
+      @todo.items = []
+
+      expected = 'No todo items yet. Call `nin add hello world` to add a new item.' + "\n"
+
+      assert_output(expected) { @todo.list }
+    end
+
     def test_add
       old_item_count = @todo.items.count
       last_id        = @todo.items.sort_by(&:id).last.id
