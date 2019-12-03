@@ -7,3 +7,11 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task :default => :test
+
+desc "Make a new build and publish it to RubyGems"
+task :publish do
+  build_name_and_version = "nin-#{Nin::VERSION}.gem"
+
+  system "gem build nin.gemspec --silent --output #{build_name_and_version}"
+  system "gem push #{build_name_and_version}"
+end
