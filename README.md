@@ -25,12 +25,6 @@
 gem install nin
 ```
 
-To run the tests:
-
-```console
-rake
-```
-
 ## Usage
 
 ```console
@@ -53,6 +47,14 @@ COMMANDS:
         i  | repl                     Open nin in REPL mode
         o  | open                     Open todo file in $EDITOR
 ```
+
+## Development
+
+- Install a recent version of `Ruby` and `Bundler`
+- Run `bundle install` to install the dependencies
+- Run `bundle exec rake` to run the test suite
+- Run `gem build nin.gemspec` to build a new version
+- To push a new version to RubyGems, run `gem push nin-VERSION-NUMBER.gem`
 
 ## Why
 
