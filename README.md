@@ -12,11 +12,11 @@
 
 ## Features
 
-- Simple, easy-to-use CLI
+- Simple, intuitive, and easy-to-use CLI
 - Currently supports: listing, adding, editing, deleting, completing,
-  archiving, and deleting archived todo items
+  archiving, prioritizing, and analyzing todo items
 - Smart colored output
-- Uses YAML for storage by default (There's an option to use TOML but no configuration for it, yet)
+- Uses YAML for storage by default (There's the option to add other stores but no configuration for it, yet)
 - Modular code covered by unit tests
 
 ## Installation
