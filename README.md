@@ -48,6 +48,30 @@ COMMANDS:
         o  | open                     Open todo file in $EDITOR
 ```
 
+- Print the usage instructions by calling `nin` without commands or arguments
+- Each command has a short and a long name, for example, `l` and `list`
+- You can utilize the power of the CLI by using shell commands and tools to
+  help you do various tasks. For example, run `nin list | grep school` to
+  filter items tagged as school
+- For adding a due date to an item, prefix the date by an `@`. If no date is
+  passed, the default is always the date of the current day
+- For adding tags, you need to prefix a `#` by a `\` (e.g., `\#`) in order for
+  the shell to interpret it as an actual `#`. Please note that you don't need
+  to do this in the REPL mode
+- The `edit` command edits the description of an item. If a date is passed, its
+  date will be updated. If one or more tags are passed, they will be added to
+  that item's tag list
+- Commands `complete`, `archive`, and `delete` can update multiple items at
+  once by passing multiple id's as arguments
+- The `prioritize` command can take a positive or a negative weight as a step
+  to either prioritize the item up or down, respectively. The step is always
+  bound to the smallest and largest id in the current items date group.  For
+  example, passing a 1 as as step prioritizes the item by one item up and
+  passing -2 prioritizes the item by 2 items down
+- REPL (interactive) mode is where you can pass commands and arguments without
+  the need to call `nin` every time and can be triggered by calling `nin i` or
+  `nin repl`
+
 ## Development
 
 - Install a recent version of `Ruby` and `Bundler`
