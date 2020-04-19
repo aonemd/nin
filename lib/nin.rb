@@ -1,10 +1,11 @@
 require 'psych'
-require 'chronic'
-require 'colored2'
-require 'http'
 require 'date'
 require 'delegate'
 require 'readline'
+
+require 'chronic'
+require 'colored2'
+require 'http'
 
 require 'byebug'
 
