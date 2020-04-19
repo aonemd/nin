@@ -6,6 +6,8 @@ require 'date'
 require 'delegate'
 require 'readline'
 
+require 'byebug'
+
 require_relative 'nin/version'
 require_relative 'nin/extensions/array_extensions'
 require_relative 'nin/extensions/string_extensions'
