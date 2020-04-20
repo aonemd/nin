@@ -3,7 +3,7 @@ module Nin
     attr_accessor :items
     attr_reader :store
 
-    def initialize(store = YamlStore.new, options = {})
+    def initialize(store, options = {})
       @store   = store
       @options = options
       @items   = load_items_sorted
