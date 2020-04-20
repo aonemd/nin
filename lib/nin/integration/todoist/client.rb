@@ -1,6 +1,6 @@
 module Nin
   module Integration
-    module Todoist
+    class Todoist
       class Client
         API_URI = 'https://api.todoist.com/rest/v1'.freeze
 

@@ -2,7 +2,7 @@ require 'test_helper'
 
 module Nin
   module Integration
-    module Todoist
+    class Todoist
       class ClientTest < Minitest::Test
         def setup
           @client = Client.new('myFakeToken')
