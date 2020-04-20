@@ -5,6 +5,7 @@ module Nin
 
     def initialize(config, options = {})
       @store             = config.fetch(:store)
+      @integrated_client = config.fetch(:integrated_client, nil)
       @options           = options
       @items             = load_items_sorted
     end
