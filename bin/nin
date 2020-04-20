@@ -2,8 +2,13 @@
 
 require_relative '../lib/nin'
 
+config = {
+  integrated_client: 'todoist',
+  integrated_client_token: 'myFakeToken'
+}
+
 begin
-  Nin::Command.new(ARGV[0], ARGV[1..-1]).call
+  Nin::Command.new(ARGV[0], ARGV[1..-1], config).call
 rescue Nin::ItemNotFoundError
   puts "Todo item does not exist"
 rescue Nin::EmptyCommandArgumentError
