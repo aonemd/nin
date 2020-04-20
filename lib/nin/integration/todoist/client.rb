@@ -8,6 +8,14 @@ module Nin
           @token = token
         end
 
+        def all_projects
+          res = HTTP.headers(accept: "application/json")
+            .auth("Bearer #{@token}")
+            .get("#{API_URI}/projects")
+
+          JSON.parse(res.body.to_s)
+        end
+
         def all_tasks
           res = HTTP.headers(accept: "application/json")
             .auth("Bearer #{@token}")
