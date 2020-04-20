@@ -34,4 +34,8 @@ class Array
       block_given? ? block.call(key_eval) : (key_eval == val)
     end
   end
+
+  def ensure_array
+    self.to_a
+  end
 end

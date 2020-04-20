@@ -14,7 +14,7 @@ module Nin
       @id        = id
       @desc      = desc
       @date      = Date.parse_or_return(date) || Date.today
-      @tags      = tags
+      @tags      = tags.ensure_array
       @uid       = uid
       @completed = completed
       @archived  = archived
