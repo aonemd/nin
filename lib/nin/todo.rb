@@ -93,6 +93,25 @@ module Nin
       end
     end
 
+    def sync_down
+      id = next_id
+      @integrated_client.fetch.each do |t|
+        item          = Item.new(id, *t)
+        existing_item = @items.find_by(:uid, item.uid)
+
+        if existing_item
+          t.delete_at(3)
+          existing_item.edit(*t)
+        else
+          @items << item
+
+          id += 1
+        end
+      end
+
+      @store.write(to_hash)
+    end
+
     private
 
     def load_items_sorted
