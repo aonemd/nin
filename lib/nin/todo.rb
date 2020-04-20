@@ -107,6 +107,7 @@ module Nin
                             item.fetch('desc'),
                             date,
                             item.fetch('tags'),
+                            item.fetch('uid', nil),
                             item.fetch('completed'),
                             item.fetch('archived'))
         end

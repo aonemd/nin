@@ -8,7 +8,7 @@ module Nin
       @item_yesterday    = Item.new(3, 'Item 3', Date.today.prev_day)
       @item_generic_date = Item.new(4, 'Item 4', Date.today.succ.succ)
       @item_with_tags    = Item.new(5, 'Item 5', nil, ['school'])
-      @archived_item     = Item.new(6, 'Item 6', nil, [], true, true)
+      @archived_item     = Item.new(6, 'Item 6', nil, [], nil, true, true)
     end
 
     def test_set_date_if_nil

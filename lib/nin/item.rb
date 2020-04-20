@@ -1,11 +1,12 @@
 module Nin
   class Item
-    attr_accessor :id, :desc, :date, :tags, :completed, :archived
+    attr_accessor :id, :desc, :date, :tags, :uid, :completed, :archived
 
     def initialize(id,
                    desc,
                    date = Date.today,
                    tags = [],
+                   uid = nil,
                    completed = false,
                    archived = false,
                    formatter = Presenter::ItemPresenter)
@@ -14,6 +15,7 @@ module Nin
       @desc      = desc
       @date      = Date.parse_or_return(date) || Date.today
       @tags      = tags
+      @uid       = uid
       @completed = completed
       @archived  = archived
       @formatter = formatter.new(self)
@@ -59,7 +61,8 @@ module Nin
         'desc' => desc,
         'tags' => tags,
         'completed' => completed,
-        'archived' => archived
+        'archived' => archived,
+        'uid' => uid
       }
     end
   end
