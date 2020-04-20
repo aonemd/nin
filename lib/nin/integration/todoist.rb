@@ -24,8 +24,8 @@ module Nin
             t["content"],
             t["created"],
             projects.fetch(t["project_id"]),
-            t["completed"],
-            t["id"]
+            t["id"],
+            t["completed"]
           ]
         end
       end
