@@ -63,7 +63,7 @@ module Nin
   class TodoTest < Minitest::Test
     def setup
       @store = FakeStore.new()
-      @todo  = Nin::Todo.new(@store)
+      @todo  = Nin::Todo.new({ store: @store })
     end
 
     def test_initialize_loads_items

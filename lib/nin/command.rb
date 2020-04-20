@@ -2,10 +2,11 @@ module Nin
   class Command
     COMMANDS_WITH_ARGS = %w(a e c ac d)
 
-    def initialize(command, args)
+    def initialize(command, args, config = {})
       @command = command
       @args    = args
-      @todo    = Todo.new(YamlStore.new, collect_options)
+      @config  = config
+      @todo    = Todo.new(collect_config, collect_options)
 
       validate_args
     end
@@ -55,6 +56,12 @@ module Nin
     end
 
     private
+
+    def collect_config
+      config = { store: YamlStore.new }
+
+      config
+    end
 
     def collect_options
       options = { archived: false }

@@ -3,10 +3,10 @@ module Nin
     attr_accessor :items
     attr_reader :store
 
-    def initialize(store, options = {})
-      @store   = store
-      @options = options
-      @items   = load_items_sorted
+    def initialize(config, options = {})
+      @store             = config.fetch(:store)
+      @options           = options
+      @items             = load_items_sorted
     end
 
     def list
