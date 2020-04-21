@@ -2,7 +2,10 @@ module Nin
   module Integration
     class Todoist
       def initialize(token)
-        @client = Client.new(token)
+        client              = Client.new(token)
+        _projects_and_tasks = client.all_projects_and_items
+        @projects           = _projects_and_tasks.fetch('projects')
+        @items              = _projects_and_tasks.fetch('items')
       end
 
       def fetch
@@ -13,19 +16,19 @@ module Nin
       private
 
       def extract_projects
-        @client.all_projects.reduce({}) do |projects, p|
+        @projects.reduce({}) do |projects, p|
           projects.update(p["id"] => p["name"])
         end
       end
 
       def extract_tasks(projects)
-        @client.all_tasks.reduce([]) do |tasks, t|
+        @items.reduce([]) do |tasks, t|
           tasks << [
             t["content"],
-            t["created"],
+            (t["due"] || {}).fetch('date', nil),
             projects.fetch(t["project_id"]),
             t["id"],
-            t["completed"]
+            t["checked"]
           ]
         end
       end
