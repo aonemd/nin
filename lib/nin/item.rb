@@ -21,11 +21,10 @@ module Nin
       @formatter = formatter.new(self)
     end
 
-    def edit(desc, date = nil, tags = [], completed = nil)
+    def edit(desc, date = nil, tags = [])
       self.desc = desc
       self.date = Date.parse_or_return(date) unless date.nil?
       self.tags.concat(tags.ensure_array).uniq!
-      self.completed = completed || self.completed
     end
 
     def toggle_completed!
