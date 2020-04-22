@@ -2,27 +2,17 @@ module Nin
   module Integration
     class Todoist
       def initialize(token)
-        client              = Client.new(token)
-        _projects_and_tasks = client.all_projects_and_items
-        @projects           = _projects_and_tasks.fetch('projects')
-        @items              = _projects_and_tasks.fetch('items')
+        @client = Client.new(token)
       end
 
-      def fetch
-        _projects = extract_projects
-        extract_tasks(_projects)
-      end
+      def items
+        data = @client.sync.read_resources(['projects', 'items'])
 
-      private
-
-      def extract_projects
-        @projects.reduce({}) do |projects, p|
+        projects = data.fetch('projects').reduce({}) do |projects, p|
           projects.update(p["id"] => p["name"])
         end
-      end
 
-      def extract_tasks(projects)
-        @items.reduce([]) do |tasks, t|
+        data.fetch('items').reduce([]) do |tasks, t|
           tasks << [
             t["content"],
             (t["due"] || {}).fetch('date', nil),
@@ -30,6 +20,10 @@ module Nin
             t["id"]
           ]
         end
+      end
+
+      def find_item(id)
+        @client.items.get(id)
       end
     end
   end

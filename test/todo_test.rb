@@ -61,7 +61,7 @@ module Nin
   end
 
   class FakeIntegratedClient
-    def fetch
+    def items
       [
         ["Remote task 1", "2020-04-01", "Personal", 36231951, false],
         ["Remote task 2", "2020-04-13", "Personal", 46251983, false],

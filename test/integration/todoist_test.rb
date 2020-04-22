@@ -7,8 +7,8 @@ module Nin
         @todoist = Todoist.new('myFakeToken')
       end
 
-      def test_fetch
-        assert_instance_of Array, @todoist.fetch
+      def test_items
+        assert_instance_of Array, @todoist.items
       end
     end
   end
