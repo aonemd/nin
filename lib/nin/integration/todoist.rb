@@ -17,7 +17,8 @@ module Nin
             t["content"],
             (t["due"] || {}).fetch('date', nil),
             projects.fetch(t["project_id"]),
-            t["id"]
+            t["id"],
+            (t["checked"] == "1")
           ]
         end
       end
