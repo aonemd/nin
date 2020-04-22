@@ -9,7 +9,7 @@ module Nin
             res = HTTP.headers(accept: "application/json")
               .get("#{API_URI}/get", params: { token: @token, item_id: id })
 
-            JSON.parse(res.body.to_s).fetch('item')
+            JSON.parse(res.body.to_s)['item']
           end
         end
       end

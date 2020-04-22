@@ -95,21 +95,36 @@ module Nin
 
     def sync_down
       id = next_id
-      @integrated_client.fetch.each do |t|
+      synced_uids = @integrated_client.items.map do |t|
         item          = Item.new(id, *t)
         existing_item = @items.find_by(:uid, item.uid)
 
         if existing_item
-          t.delete_at(3)
-          existing_item.edit(*t)
+          existing_item.edit(item.desc, item.date, item.tags, item.completed)
         else
           @items << item
 
           id += 1
         end
+
+        item.uid
       end
 
-      @store.write(to_hash)
+      unsynced_uids = @items.where(:uid) { |item_uid| !item_uid.nil? }.map(&:uid) - synced_uids
+      unsynced_uids.each do |uid|
+        item = @items.find_by(:uid, uid)
+        t = @integrated_client.find_item(uid)
+
+        @items.delete(item) and next if t.nil? || t.fetch("is_deleted") == 1
+
+        if t.fetch("checked") == 1
+          item.completed = true
+        else
+          item.completed = false
+        end
+      end
+
+      reset_item_indices!
     end
 
     private
