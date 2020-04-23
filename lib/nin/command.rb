@@ -63,8 +63,10 @@ module Nin
       _client_name        = @config.fetch(:integrated_client, nil)
       _client_credentials = @config.fetch(:integrated_client_token, nil)
       if _client_name && _client_credentials
-        _client_klass = Object.const_get("Nin::Integration::#{_client_name.capitalize}")
-        config[:integrated_client] = _client_klass.new(_client_credentials)
+        _client_klass       = Object.const_get("Nin::Integration::#{_client_name.capitalize}")
+        _synchronizer_klass = Object.const_get("Nin::Integration::Synchronizer::#{_client_name.capitalize}")
+
+        config[:integration_syncrhonizer] = _synchronizer_klass.new(_client_klass.new(_client_credentials))
       end
 
       config
