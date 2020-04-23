@@ -1,6 +1,6 @@
 module Nin
   module Integration
-    class Todoist
+    module Todoist
       class Client
         BASE_URI = 'https://api.todoist.com/sync/v8'.freeze
 

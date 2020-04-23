@@ -1,6 +1,6 @@
 module Nin
   module Integration
-    class Todoist
+    module Todoist
       class Client
         class Item < BaseClient
           API_URI = "#{BASE_URI}/items".freeze

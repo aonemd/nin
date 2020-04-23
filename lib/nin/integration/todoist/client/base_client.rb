@@ -1,6 +1,6 @@
 module Nin
   module Integration
-    class Todoist
+    module Todoist
       class Client
         class BaseClient
           def initialize(token)
