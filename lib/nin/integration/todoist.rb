@@ -5,6 +5,31 @@ module Nin
         @client = Client.new(token)
       end
 
+      def projects
+        data = @client.sync.read_resources(['projects'])
+
+        data.fetch('projects').reduce({}) do |projects, p|
+          projects.update(p["id"] => p["name"])
+        end
+      end
+
+      def find_project(id)
+        @client.projects.get(id)
+      end
+
+      def add_project(project)
+        commands = [
+          {
+            "type": "project_add",
+            "temp_id": SecureRandom.uuid,
+            "uuid": SecureRandom.uuid,
+            "args": project
+          }
+        ].to_json
+
+        @client.sync.write_resources(commands).fetch('temp_id_mapping').values.first
+      end
+
       def items
         data = @client.sync.read_resources(['projects', 'items'])
 
@@ -25,6 +50,10 @@ module Nin
 
       def find_item(id)
         @client.items.get(id)
+      end
+
+      def add_item(item)
+        @client.items.add(item)
       end
     end
   end

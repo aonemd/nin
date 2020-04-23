@@ -12,6 +12,10 @@ module Nin
           @sync ||= Client::Sync.new(@token)
         end
 
+        def projects
+          @projects ||= Client::Project.new(@token)
+        end
+
         def items
           @items ||= Client::Item.new(@token)
         end

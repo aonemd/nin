@@ -127,6 +127,30 @@ module Nin
       reset_item_indices!
     end
 
+    def sync_up
+      projects      = @integrated_client.projects
+      project_names = projects.values
+      unsynced_items = @items.where(:uid) { |item_uid| item_uid.nil? }
+      unsynced_items.each do |item|
+        project_name = item.tags.first
+        uid = if project_name
+                project_id   = unless project_names.include?(project_name)
+                                 @integrated_client.add_project(name: project_name)
+                               else
+                                 projects.find { |k, v| v == project_name }.first
+                               end
+
+                @integrated_client.add_item(content: item.desc, project_id: project_id).fetch('id')
+              else
+                @integrated_client.add_item(content: item.desc).fetch('id')
+              end
+
+        item.uid = uid
+      end
+
+      @store.write(to_hash)
+    end
+
     private
 
     def load_items_sorted

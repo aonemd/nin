@@ -18,6 +18,14 @@ module Nin
               data
             end
           end
+
+          def write_resources(commands)
+            res = HTTP.headers(accept: "application/json")
+              .get("#{BASE_URI}/sync", params: { token: @token,
+                                                 commands: commands })
+
+            JSON.parse(res.body.to_s)
+          end
         end
       end
     end
