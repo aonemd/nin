@@ -53,7 +53,16 @@ module Nin
       end
 
       def add_item(item)
-        @client.items.add(item)
+        commands = [
+          {
+            "type": "item_add",
+            "temp_id": SecureRandom.uuid,
+            "uuid": SecureRandom.uuid,
+            "args": item
+          }
+        ].to_json
+
+        @client.sync.write_resources(commands).fetch('temp_id_mapping').values.first
       end
     end
   end

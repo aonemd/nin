@@ -140,9 +140,9 @@ module Nin
                                  projects.find { |k, v| v == project_name }.first
                                end
 
-                @integrated_client.add_item(content: item.desc, project_id: project_id).fetch('id')
+                @integrated_client.add_item(content: item.desc, due: { date: item.date }, project_id: project_id)
               else
-                @integrated_client.add_item(content: item.desc).fetch('id')
+                @integrated_client.add_item(content: item.desc, due: { date: item.date })
               end
 
         item.uid = uid
