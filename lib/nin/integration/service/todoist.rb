@@ -65,7 +65,7 @@ module Nin
           end
 
           def update(items)
-            commands = items.ensure_array.map do |id|
+            commands = items.ensure_array.map do |item|
               {
                 "type": "item_update",
                 "uuid": SecureRandom.uuid,

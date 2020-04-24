@@ -50,46 +50,46 @@ module Nin
         def sync_add(params)
           item = params.fetch(:item)
 
-          projects      = @service.projects.all
-          project_names = projects.values
-          project_name = item.tags.first
+          payload = _get_item_write_payload(item)
 
-          uid = if project_name
-                  project_id = unless project_names.include?(project_name)
-                                 @service.projects.add(name: project_name)
-                               else
-                                 projects.find { |k, v| v == project_name }.first
-                               end
-
-                  @service.items.add(content: item.desc, due: { date: item.date }, project_id: project_id)
-                else
-                  @service.items.add(content: item.desc, due: { date: item.date })
-                end
-
+          uid = @service.items.add(payload)
           item.uid = uid
         end
 
         def sync_edit(params)
           item = params.fetch(:item)
 
-          projects      = @service.projects.all
-          project_names = projects.values
+          payload      = _get_item_write_payload(item)
+          payload[:id] = item.uid
+
+          @service.items.update(payload)
+        end
+
+        def sync_delete(params)
+          @service.items.delete(params.fetch(:ids))
+        end
+
+        def _get_item_write_payload(item)
+          payload = {
+            content: item.desc,
+            due: { date: item.date },
+            checked: item.completed
+          }
 
           if project_name = item.tags.first
+            projects      = @service.projects.all
+            project_names = projects.values
+
             project_id = unless project_names.include?(project_name)
                            @service.projects.add(name: project_name)
                          else
                            projects.find { |k, v| v == project_name }.first
                          end
 
-            @service.items.update(id: item.uid, content: item.desc, due: { date: item.date }, checked: item.completed, project_id: project_id)
-          else
-            @service.items.update(id: item.uid, content: item.desc, due: { date: item.date }, checked: item.completed)
+            payload[:project_id] = project_id
           end
-        end
 
-        def sync_delete(params)
-          @service.items.delete(params.fetch(:ids))
+          payload
         end
       end
     end
