@@ -25,14 +25,12 @@ module Nin
 
           id = next_id
           synced_uids = @service.items.all.map do |t|
-            item          = Item.new(id, *t)
-            existing_item = items.find_by(:uid, item.uid)
+            item = Item.new(id, *t)
 
-            if existing_item
+            if existing_item = items.find_by(:uid, item.uid)
               existing_item.edit(item.desc, item.date, item.tags, item.completed)
             else
               items << item
-
               id += 1
             end
 
@@ -42,15 +40,10 @@ module Nin
           unsynced_uids = items.where(:uid) { |item_uid| !item_uid.nil? }.map(&:uid) - synced_uids
           unsynced_uids.each do |uid|
             item = items.find_by(:uid, uid)
-            t = @client.items.get(uid)
+            t    = @client.items.get(uid)
 
             items.delete(item) and next if t.nil? || t.fetch("is_deleted") == 1
-
-            if t.fetch("checked") == 1
-              item.completed = true
-            else
-              item.completed = false
-            end
+            item.completed = (t.fetch("checked") == 1)
           end
         end
 
