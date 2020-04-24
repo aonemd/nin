@@ -85,16 +85,16 @@ module Nin
     end
 
     def delete(*ids)
-      items = ids.map do |id|
+      uids = ids.map do |id|
         item = find_by_id(id.to_i)
         @items.delete(item)
 
-        item
+        item.uid
       end
 
       reset_item_indices!
 
-      fork_sync(:delete, items: items)
+      fork_sync(:delete, ids: uids)
     end
 
     def analyze
