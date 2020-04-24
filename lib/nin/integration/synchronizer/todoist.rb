@@ -2,31 +2,40 @@ module Nin
   module Integration
     class Synchronizer
       class Todoist < Synchronizer
-        def sync_up(params)
-          items = params.fetch(:items)
-
-          projects      = fetch_projects
-          project_names = projects.values
-          unsynced_items = items.where(:uid) { |item_uid| item_uid.nil? }
-          unsynced_items.each do |item|
-            project_name = item.tags.first
-            uid = if project_name
-                    project_id = unless project_names.include?(project_name)
-                                   add_project(name: project_name)
-                                 else
-                                   projects.find { |k, v| v == project_name }.first
-                                 end
-
-                    add_item(content: item.desc, due: { date: item.date }, project_id: project_id)
-                  else
-                    add_item(content: item.desc, due: { date: item.date })
-                  end
-
-            item.uid = uid
+        def sync(op, params = {})
+          case op
+          when :add
+            sync_add(params)
+          when :read
+            sync_read(params)
           end
         end
 
-        def sync_down(params)
+        private
+
+        def sync_add(params)
+          item = params.fetch(:item)
+
+          projects      = fetch_projects
+          project_names = projects.values
+          project_name = item.tags.first
+
+          uid = if project_name
+                  project_id = unless project_names.include?(project_name)
+                                 add_project(name: project_name)
+                               else
+                                 projects.find { |k, v| v == project_name }.first
+                               end
+
+                  add_item(content: item.desc, due: { date: item.date }, project_id: project_id)
+                else
+                  add_item(content: item.desc, due: { date: item.date })
+                end
+
+          item.uid = uid
+        end
+
+        def sync_read(params)
           items   = params.fetch(:items)
           next_id = params.fetch(:next_id)
 
@@ -61,8 +70,6 @@ module Nin
           end
         end
 
-        private
-
         def fetch_projects
           @client
             .sync
@@ -88,7 +95,7 @@ module Nin
           end
         end
 
-        def add_project
+        def add_project(project)
           commands = [
             {
               "type": "project_add",
@@ -101,7 +108,7 @@ module Nin
           @client.sync.write_resources(commands).fetch('temp_id_mapping').values.first
         end
 
-        def add_item
+        def add_item(item)
           commands = [
             {
               "type": "item_add",

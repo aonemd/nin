@@ -11,6 +11,8 @@ module Nin
     end
 
     def list
+      sync(:read, items: @items, next_id: next_id)
+
       items_to_list = if @options[:archived]
                         @items
                       else
@@ -21,9 +23,12 @@ module Nin
     end
 
     def add(desc, date, tags)
-      @items << Item.new(next_id, desc, date, tags)
+      item = Item.new(next_id, desc, date, tags)
+      @items << item
 
       @store.write(to_hash)
+
+      fork_sync(:add, item: item)
     end
 
     def edit(id, desc, date, tags)
@@ -93,16 +98,19 @@ module Nin
       end
     end
 
-    def sync_down
-      @integration_syncrhonizer.sync_down(items: @items, next_id: next_id)
-
+    def sync(op, params = {})
+      @integration_syncrhonizer.sync(op, params)
       reset_item_indices!
     end
 
-    def sync_up
-      @integration_syncrhonizer.sync_up(items: @items)
+    def fork_sync(op, params = {})
+      pid = fork do
+        @integration_syncrhonizer.sync(op, params)
+        reset_item_indices!
 
-      @store.write(to_hash)
+        exit
+      end
+      Process.detach(pid)
     end
 
     private
