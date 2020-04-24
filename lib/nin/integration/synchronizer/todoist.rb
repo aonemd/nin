@@ -10,6 +10,8 @@ module Nin
             sync_add(params)
           when :edit
             sync_edit(params)
+          when :delete
+            sync_delete(params)
           end
         end
 
@@ -91,6 +93,10 @@ module Nin
           end
         end
 
+        def sync_delete(params)
+          delete_items(params.fetch(:items))
+        end
+
         def fetch_projects
           @client
             .sync
@@ -150,6 +156,18 @@ module Nin
               "args": item
             }
           ].to_json
+
+          @client.sync.write_resources(commands)
+        end
+
+        def delete_items(items)
+          commands = items.map do |item|
+            {
+              "type": "item_delete",
+              "uuid": SecureRandom.uuid,
+              "args": { 'id': item.uid }
+            }
+          end.to_json
 
           @client.sync.write_resources(commands)
         end
