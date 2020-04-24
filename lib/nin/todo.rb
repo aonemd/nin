@@ -62,6 +62,8 @@ module Nin
       ids.each do |id|
         item = find_by_id(id.to_i)
         item.toggle_completed!
+
+        fork_sync(:edit, item: item)
       end
 
       @store.write(to_hash)

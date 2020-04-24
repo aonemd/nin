@@ -85,9 +85,9 @@ module Nin
                            projects.find { |k, v| v == project_name }.first
                          end
 
-            update_item(id: item.uid, content: item.desc, due: { date: item.date }, project_id: project_id)
+            update_item(id: item.uid, content: item.desc, due: { date: item.date }, checked: item.completed, project_id: project_id)
           else
-            update_item(id: item.uid, content: item.desc, due: { date: item.date })
+            update_item(id: item.uid, content: item.desc, due: { date: item.date }, checked: item.completed)
           end
         end
 
