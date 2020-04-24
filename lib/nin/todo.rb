@@ -37,6 +37,8 @@ module Nin
       item.edit(desc, date, tags)
 
       @store.write(to_hash)
+
+      fork_sync(:edit, item: item)
     end
 
     def prioritize(id, step = 1)

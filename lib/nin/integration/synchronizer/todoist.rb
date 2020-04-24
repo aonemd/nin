@@ -4,36 +4,16 @@ module Nin
       class Todoist < Synchronizer
         def sync(op, params = {})
           case op
-          when :add
-            sync_add(params)
           when :read
             sync_read(params)
+          when :add
+            sync_add(params)
+          when :edit
+            sync_edit(params)
           end
         end
 
         private
-
-        def sync_add(params)
-          item = params.fetch(:item)
-
-          projects      = fetch_projects
-          project_names = projects.values
-          project_name = item.tags.first
-
-          uid = if project_name
-                  project_id = unless project_names.include?(project_name)
-                                 add_project(name: project_name)
-                               else
-                                 projects.find { |k, v| v == project_name }.first
-                               end
-
-                  add_item(content: item.desc, due: { date: item.date }, project_id: project_id)
-                else
-                  add_item(content: item.desc, due: { date: item.date })
-                end
-
-          item.uid = uid
-        end
 
         def sync_read(params)
           items   = params.fetch(:items)
@@ -67,6 +47,47 @@ module Nin
             else
               item.completed = false
             end
+          end
+        end
+
+        def sync_add(params)
+          item = params.fetch(:item)
+
+          projects      = fetch_projects
+          project_names = projects.values
+          project_name = item.tags.first
+
+          uid = if project_name
+                  project_id = unless project_names.include?(project_name)
+                                 add_project(name: project_name)
+                               else
+                                 projects.find { |k, v| v == project_name }.first
+                               end
+
+                  add_item(content: item.desc, due: { date: item.date }, project_id: project_id)
+                else
+                  add_item(content: item.desc, due: { date: item.date })
+                end
+
+          item.uid = uid
+        end
+
+        def sync_edit(params)
+          item = params.fetch(:item)
+
+          projects      = fetch_projects
+          project_names = projects.values
+
+          if project_name = item.tags.first
+            project_id = unless project_names.include?(project_name)
+                           add_project(name: project_name)
+                         else
+                           projects.find { |k, v| v == project_name }.first
+                         end
+
+            update_item(id: item.uid, content: item.desc, due: { date: item.date }, project_id: project_id)
+          else
+            update_item(id: item.uid, content: item.desc, due: { date: item.date })
           end
         end
 
@@ -119,6 +140,18 @@ module Nin
           ].to_json
 
           @client.sync.write_resources(commands).fetch('temp_id_mapping').values.first
+        end
+
+        def update_item(item)
+          commands = [
+            {
+              "type": "item_update",
+              "uuid": SecureRandom.uuid,
+              "args": item
+            }
+          ].to_json
+
+          @client.sync.write_resources(commands)
         end
       end
     end
