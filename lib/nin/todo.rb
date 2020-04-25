@@ -107,11 +107,15 @@ module Nin
     end
 
     def sync(op, params = {})
+      return unless @integration_syncrhonizer
+
       @integration_syncrhonizer.sync(op, params)
       reset_item_indices!
     end
 
     def fork_sync(op, params = {})
+      return unless @integration_syncrhonizer
+
       pid = fork do
         @integration_syncrhonizer.sync(op, params)
         exit

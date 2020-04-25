@@ -60,21 +60,10 @@ module Nin
     end
   end
 
-  class FakeIntegratedClient
-    def items
-      [
-        ["Remote task 1", "2020-04-01", "Personal", 36231951, false],
-        ["Remote task 2", "2020-04-13", "Personal", 46251983, false],
-        ["Remote task 3", "2020-04-07", "Work", 56251782, true]
-      ]
-    end
-  end
-
   class TodoTest < Minitest::Test
     def setup
       @store = FakeStore.new()
-      @todo  = Nin::Todo.new({ store: @store,
-                               integrated_client: FakeIntegratedClient.new })
+      @todo  = Nin::Todo.new({ store: @store })
     end
 
     def test_initialize_loads_items
@@ -387,13 +376,6 @@ module Nin
       @todo.delete(2, 3)
 
       assert_equal 2, old_item_count - @todo.items.count
-    end
-
-    def test_sync_down
-      old_item_count = @todo.items.count
-      @todo.sync_down
-
-      assert_equal 3,  @todo.items.count - old_item_count
     end
   end
 end
