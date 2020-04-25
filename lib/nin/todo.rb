@@ -11,7 +11,7 @@ module Nin
     end
 
     def list
-      sync(:read, items: @items, next_id: next_id)
+      sync(:read, true, items: @items, next_id: next_id)
 
       items_to_list = if @options[:archived]
                         @items
@@ -28,7 +28,7 @@ module Nin
 
       @store.write(to_hash)
 
-      fork_sync(:add, item: item)
+      fork_sync(:add, true, item: item)
     end
 
     def edit(id, desc, date, tags)
@@ -38,7 +38,7 @@ module Nin
 
       @store.write(to_hash)
 
-      fork_sync(:edit, item: item)
+      fork_sync(:edit, false, item: item)
     end
 
     def prioritize(id, step = 1)
@@ -63,7 +63,7 @@ module Nin
         item = find_by_id(id.to_i)
         item.toggle_completed!
 
-        fork_sync(:edit, item: item)
+        fork_sync(:edit, false, item: item)
       end
 
       @store.write(to_hash)
@@ -94,7 +94,7 @@ module Nin
 
       reset_item_indices!
 
-      fork_sync(:delete, ids: uids)
+      fork_sync(:delete, false, ids: uids)
     end
 
     def analyze
@@ -106,18 +106,20 @@ module Nin
       end
     end
 
-    def sync(op, params = {})
+    def sync(op, store_write = false, params = {})
       return unless @integration_syncrhonizer
 
       @integration_syncrhonizer.sync(op, params)
-      reset_item_indices!
+      reset_item_indices! if store_write
     end
 
-    def fork_sync(op, params = {})
+    def fork_sync(op, store_write = false, params = {})
       return unless @integration_syncrhonizer
 
       pid = fork do
         @integration_syncrhonizer.sync(op, params)
+        @store.write(to_hash) if store_write
+
         exit
       end
       Process.detach(pid)
