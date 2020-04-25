@@ -114,8 +114,6 @@ module Nin
     def fork_sync(op, params = {})
       pid = fork do
         @integration_syncrhonizer.sync(op, params)
-        reset_item_indices!
-
         exit
       end
       Process.detach(pid)
