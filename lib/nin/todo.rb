@@ -79,8 +79,6 @@ module Nin
 
     def delete_archived
       delete(*archived_items.map(&:id))
-
-      reset_item_indices!
     end
 
     def delete(*ids)
