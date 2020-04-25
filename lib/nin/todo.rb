@@ -26,19 +26,18 @@ module Nin
       item = Item.new(next_id, desc, date, tags)
       @items << item
 
-      @store.write(to_hash)
-
       fork_sync(:add, true, item: item)
+
+      @store.write(to_hash)
     end
 
     def edit(id, desc, date, tags)
       item = find_by_id(id)
-
       item.edit(desc, date, tags)
 
-      @store.write(to_hash)
-
       fork_sync(:edit, false, item: item)
+
+      @store.write(to_hash)
     end
 
     def prioritize(id, step = 1)
@@ -92,9 +91,9 @@ module Nin
         item.uid
       end
 
-      reset_item_indices!
-
       fork_sync(:delete, false, ids: uids)
+
+      reset_item_indices!
     end
 
     def analyze
