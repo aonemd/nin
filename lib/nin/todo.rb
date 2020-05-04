@@ -35,7 +35,7 @@ module Nin
       item = find_by_id(id)
       item.edit(desc, date, tags)
 
-      fork_sync(:edit, false, item: item)
+      fork_sync(:edit, false, items: item)
 
       @store.write(to_hash)
     end
@@ -58,12 +58,14 @@ module Nin
     end
 
     def complete(*ids)
-      ids.each do |id|
+      items = ids.map do |id|
         item = find_by_id(id.to_i)
         item.toggle_completed!
 
-        fork_sync(:edit, false, item: item)
+        item
       end
+
+      fork_sync(:edit, false, items: items)
 
       @store.write(to_hash)
     end

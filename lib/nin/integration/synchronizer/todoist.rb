@@ -57,10 +57,12 @@ module Nin
         end
 
         def sync_edit(params)
-          item = params.fetch(:item)
+          payload = params.fetch(:items).ensure_array.map do |item|
+            item_payload      = _get_item_write_payload(item)
+            item_payload[:id] = item.uid
 
-          payload      = _get_item_write_payload(item)
-          payload[:id] = item.uid
+            item_payload
+          end
 
           @service.items.update(payload)
         end
