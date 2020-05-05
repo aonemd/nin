@@ -79,16 +79,23 @@ module Nin
           }
 
           if project_name = item.tags.first
-            projects      = @service.projects.all
-            project_names = projects.values
+            @projects      ||= @service.projects.all
+            @project_names ||= @projects.values
 
-            project_id = unless project_names.include?(project_name)
+            _new_project = false
+            project_id = unless @project_names.include?(project_name)
                            @service.projects.add(name: project_name)
+                           _new_project = true
                          else
-                           projects.find { |k, v| v == project_name }.first
+                           @projects.find { |k, v| v == project_name }.first
                          end
 
-            payload[:project_id] = project_id
+            if _new_project
+              @projects[project_id] = project_name
+              @project_names.push(project_name)
+            end
+
+            payload[:project_id]  = project_id
           end
 
           payload
