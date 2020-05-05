@@ -12,6 +12,8 @@ module Nin
             sync_add(params)
           when :edit
             sync_edit(params)
+          when :edit_completed
+            sync_edit(params, :checked)
           when :delete
             sync_delete(params)
           end
@@ -56,9 +58,13 @@ module Nin
           item.uid = uid
         end
 
-        def sync_edit(params)
+        def sync_edit(params, type = :full)
           payload = params.fetch(:items).ensure_array.map do |item|
-            item_payload      = _get_item_write_payload(item)
+            item_payload = if type == :checked
+                             { checked: item.completed }
+                           else
+                             _get_item_write_payload(item)
+                           end
             item_payload[:id] = item.uid
 
             item_payload

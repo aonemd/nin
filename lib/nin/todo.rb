@@ -65,7 +65,7 @@ module Nin
         item
       end
 
-      fork_sync(:edit, false, items: items)
+      fork_sync(:edit_completed, false, items: items)
 
       @store.write(to_hash)
     end
