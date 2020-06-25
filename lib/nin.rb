@@ -8,7 +8,9 @@ require 'chronic'
 require 'colored2'
 require 'http'
 
-require 'byebug'
+if RUBY_PLATFORM =~ /mri|mingw|x66_mingw/i
+  require 'byebug'
+end
 
 require_relative 'nin/version'
 require_relative 'nin/extensions/object_extensions'
