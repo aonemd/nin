@@ -15,6 +15,7 @@
 - Simple, intuitive, and easy-to-use CLI
 - Currently supports: listing, adding, editing, deleting, completing,
   archiving, prioritizing, and analyzing todo items
+- Integration and synchronization with [Todoist](https://todoist.com/) (With potential integration with more platforms)
 - Smart colored output
 - Uses YAML for storage by default (There's the option to add other stores but no configuration for it, yet)
 - Modular code covered by unit tests
@@ -71,6 +72,14 @@ COMMANDS:
 - REPL (interactive) mode is where you can pass commands and arguments without
   the need to call `nin` every time and can be triggered by calling `nin i` or
   `nin repl`
+
+## Integration
+
+### Todoist
+
+For Todoist integration, two environment variables must be set:
+  - `NIN_INTEGRATION_CLIENT=todoist`
+  - `NIN_INTEGRATION_CLIENT_TOKEN=token`. Token can be found in your [integration settings page](https://todoist.com/prefs/integrations)
 
 ## Development
 
