@@ -11,7 +11,7 @@ module Nin
     end
 
     def list
-      sync(:read, true, items: @items, next_id: next_id)
+      sync(:read, true, items: @items, next_id: next_id) unless @options[:local]
 
       items_to_list = if @options[:archived]
                         @items

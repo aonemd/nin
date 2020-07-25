@@ -41,7 +41,7 @@ module Nin
         puts "NAME:\n\tnin - a simple, full-featured command line todo app"
         puts "\nUSAGE:\n\tnin COMMAND [arguments...]"
         puts "\nCOMMANDS:"
-        puts "\tl  | list          [a]        List all unarchived todos. Pass optional argument `a` to list all todos"
+        puts "\tl  | list          [a|l]      List all unarchived todos. Pass optional argument `a` to list all todos or `l` to list local todos only"
         puts "\ta  | add           desc       Add a todo. Prepend due date by a @. Prepend each tag by a \\#"
         puts "\te  | edit          id desc    Edit a todo. Prepend due date by a @. Prepend each tag by a \\#"
         puts "\tp  | prioritize    id step    Prioritize a todo by either a positive or negative step within its date group"
@@ -73,10 +73,12 @@ module Nin
     end
 
     def collect_options
-      options = { archived: false }
+      options = { archived: false, local: false }
 
       if @command == 'l' && @args[0] == 'a'
         options[:archived] = true
+      elsif @command == 'l' && @args[0] == 'l'
+        options[:local] = true
       end
 
       options

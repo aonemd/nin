@@ -35,7 +35,7 @@ USAGE:
         nin COMMAND [arguments...]
 
 COMMANDS:
-        l  | list          [a]        List all unarchived todos. Pass optional argument `a` to list all todos
+        l  | list          [a|l]      List all unarchived todos. Pass optional argument `a` to list all todos or `l` to list local todos only
         a  | add           desc       Add a todo. Prepend due date by a @. Prepend each tag by a \#
         e  | edit          id desc    Edit a todo. Prepend due date by a @. Prepend each tag by a \#
         p  | prioritize    id step    Prioritize a todo by either a positive or negative step within its date group
