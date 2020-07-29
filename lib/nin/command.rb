@@ -37,6 +37,8 @@ module Nin
         run_interactive_mode
       when 'o', 'open'
         system("`echo $EDITOR` #{@todo.store.file}")
+      when 'v', 'version'
+        puts "nin #{Nin::VERSION}"
       else
         puts "NAME:\n\tnin - a simple, full-featured command line todo app"
         puts "\nUSAGE:\n\tnin COMMAND [arguments...]"
@@ -52,6 +54,7 @@ module Nin
         puts "\ts  | analyze                  Analyze tasks and print statistics"
         puts "\ti  | repl                     Open nin in REPL mode"
         puts "\to  | open                     Open todo file in $EDITOR"
+        puts "\tv  | version                  Print current version of nin"
       end
     end
 

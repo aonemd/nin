@@ -47,6 +47,7 @@ COMMANDS:
         s  | analyze                  Analyze tasks and print statistics
         i  | repl                     Open nin in REPL mode
         o  | open                     Open todo file in $EDITOR
+        v  | version                  Print current version of nin
 ```
 
 - Print the usage instructions by calling `nin` without commands or arguments
