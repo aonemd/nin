@@ -81,6 +81,7 @@ COMMANDS:
 For Todoist integration, two environment variables must be set:
   - `NIN_INTEGRATION_CLIENT=todoist`
   - `NIN_INTEGRATION_CLIENT_TOKEN=token`. Token can be found in your [integration settings page](https://todoist.com/prefs/integrations)
+  - `NIN_INTEGRATION_TIMEOUT=interval_in_seconds`. A timeout interval for when the synchronization times out. Defaults to 60 seconds
 
 ## Development
 
