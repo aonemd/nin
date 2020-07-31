@@ -3,9 +3,9 @@
 require_relative '../lib/nin'
 
 config = {
-  integrated_client: ENV['NIN_INTEGRATION_CLIENT'],
-  integrated_client_token: ENV['NIN_INTEGRATION_CLIENT_TOKEN'],
-  integrated_timeout_interval: ENV['NIN_INTEGRATION_TIMEOUT']
+  integration_client: ENV['NIN_INTEGRATION_CLIENT'],
+  integration_client_token: ENV['NIN_INTEGRATION_CLIENT_TOKEN'],
+  integration_timeout_interval: ENV['NIN_INTEGRATION_TIMEOUT']
 }
 
 begin
