@@ -1,3 +1,5 @@
+require 'timeout'
+
 module Nin
   class Todo
     attr_accessor :items
@@ -112,8 +114,15 @@ module Nin
     def sync(op, store_write = false, params = {})
       return unless @integration_syncrhonizer
 
-      @integration_syncrhonizer.sync(op, params)
-      reset_item_indices! if store_write
+      begin
+        Timeout::timeout(@integration_syncrhonizer.timeout_interval) {
+          @integration_syncrhonizer.sync(op, params)
+          reset_item_indices! if store_write
+        }
+      rescue Timeout::Error
+        puts 'Syncing timed out. Showing local items...'
+        puts
+      end
     end
 
     def fork_sync(op, store_write = false, params = {})
