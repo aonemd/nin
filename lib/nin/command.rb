@@ -48,7 +48,7 @@ module Nin
         puts "\te  | edit          id desc    Edit a todo. Prepend due date by a @. Prepend each tag by a \\#"
         puts "\tp  | prioritize    id step    Prioritize a todo by either a positive or negative step within its date group"
         puts "\tc  | complete      id(s)      Un/complete todo(s)"
-        puts "\tac | archive       id(s)      Un/archive todo(s)"
+        puts "\tac | archive       id(s)|c    Un/archive todo(s) or pass `c` to archive all completed items"
         puts "\td  | delete        id(s)      Delete todo(s)"
         puts "\tgc | garbage                  Delete all archived todos. Resets item ids as a side effect"
         puts "\ts  | analyze                  Analyze tasks and print statistics"
@@ -76,12 +76,14 @@ module Nin
     end
 
     def collect_options
-      options = { archived: false, local: false }
+      options = { archived: false, local: false, completed_only: false }
 
       if @command == 'l' && @args[0] == 'a'
         options[:archived] = true
       elsif @command == 'l' && @args[0] == 'l'
         options[:local] = true
+      elsif @command == 'ac' && @args[0] == 'c'
+        options[:completed_only] = true
       end
 
       options

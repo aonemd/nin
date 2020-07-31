@@ -41,7 +41,7 @@ COMMANDS:
         e  | edit          id desc    Edit a todo. Prepend due date by a @. Prepend each tag by a \#
         p  | prioritize    id step    Prioritize a todo by either a positive or negative step within its date group
         c  | complete      id(s)      Un/complete todo(s)
-        ac | archive       id(s)      Un/archive todo(s)
+        ac | archive       id(s)|c    Un/archive todo(s) or pass `c` to archive all completed items
         d  | delete        id(s)      Delete todo(s)
         gc | garbage                  Delete all archived todos. Resets item ids as a side effect
         s  | analyze                  Analyze tasks and print statistics

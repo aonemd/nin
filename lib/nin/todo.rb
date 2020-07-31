@@ -71,9 +71,13 @@ module Nin
     end
 
     def archive(*ids)
-      ids.each do |id|
-        item = find_by_id(id.to_i)
-        item.toggle_archived!
+      unless @options[:completed_only]
+        ids.each do |id|
+          item = find_by_id(id.to_i)
+          item.toggle_archived!
+        end
+      else
+        completed_unarchived_items.each(&:toggle_archived!)
       end
 
       @store.write(to_hash)
@@ -154,6 +158,10 @@ module Nin
 
     def unarchived_items
       @items.where(:archived?, false)
+    end
+
+    def completed_unarchived_items
+      unarchived_items.where(:completed, true)
     end
 
     def find_by_id(id)
