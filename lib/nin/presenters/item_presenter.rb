@@ -2,7 +2,7 @@ module Nin
   module Presenter
     class ItemPresenter < ::SimpleDelegator
       def call(options = {})
-        _id, _completed, _date, _desc, _tags = id, completed, date, desc, tags
+        _id, _completed, _date, _desc, _tags = id, decorate_completed, decorate_date, decorate_desc, decorate_tags
 
         separating_spaces = options.fetch(:separating_spaces, 2)
         id_spaces         = options.fetch(:longest_id, 1) + separating_spaces
@@ -15,7 +15,7 @@ module Nin
 
       private
 
-      def desc
+      def decorate_desc
         if self.archived?
           self.desc.yellow
         elsif self.completed?
@@ -25,7 +25,7 @@ module Nin
         end
       end
 
-      def completed
+      def decorate_completed
         if self.completed?
           '[x]'.green
         else
@@ -33,7 +33,7 @@ module Nin
         end
       end
 
-      def date
+      def decorate_date
         date_in_words = '@' << self.date.humanize
 
         if self.past?
@@ -45,7 +45,7 @@ module Nin
         end
       end
 
-      def tags
+      def decorate_tags
         self.tags.map { |tag| tag.dup.prepend('#') }.join(' ').blue
       end
     end
