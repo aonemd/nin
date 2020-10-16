@@ -8,6 +8,7 @@
   ![nin demo GIF](/demo.gif)
 </div>
 
+[![Gem Version](https://badge.fury.io/rb/nin.svg)](https://badge.fury.io/rb/nin)
 [![Build Status](https://travis-ci.com/aonemd/nin.svg?branch=master)](https://travis-ci.com/aonemd/nin)
 
 ## Features
