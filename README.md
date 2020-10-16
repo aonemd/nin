@@ -104,8 +104,8 @@ my phone and I needed something more readable.
 
 ## Contribution
 
-Contributions are welcome. If you found a bug or want to add a new feature,
-open an issue or send a pull request.
+Contributions are welcome. If you find a bug or want to add a new feature,
+please open an issue or send a pull request.
 
 ## License
 
