@@ -2,7 +2,7 @@ module Nin
   module Integration
     module Todoist
       class Client
-        BASE_URI = 'https://api.todoist.com/sync/v8'.freeze
+        BASE_URI = 'https://api.todoist.com/sync/v9'.freeze
 
         def initialize(token)
           @token = token
